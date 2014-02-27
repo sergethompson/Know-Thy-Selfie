@@ -2,14 +2,31 @@ class SelfiesController < ApplicationController
 
 
 	def index
-
+		@selfies = Selfie.all
+		respond_to do |format|
+			format.html
+			format.json {render json: @selfies}
+		end
 	end
 
 
 	def create
-
+		@selfie = Selfie.create(selfie_params)
+		respond_to do |format|
+			format.html {}
+			format.json { render json: @selfie}
+		end
 	end
 
+
+	def destroy
+		@selfie = Selfie.find(params[:id])
+		@selfie.destroy
+		respond_to do |format|
+			format.html {}
+			format.json {render json: @selfie}
+		end
+	end
 
 
 
