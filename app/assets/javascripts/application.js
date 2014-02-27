@@ -10,6 +10,15 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require jquery_ujs
+//= require js/Drag
+//= require js/jqueryIntegration
+//= require js/Photobooth
+//= require js/ResizeHandle
+//= require js/Slider
+//= require js/Tools
+//= require website/js/hijs
+//= require website/js/jquery
+//= require website/js/script
+//= require photobooth_min
 //= require_tree .
