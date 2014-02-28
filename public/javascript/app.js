@@ -1,6 +1,15 @@
 // ** Model **        (:image_url, :json_analysis, :votes,
 	//                   :latitude, :longitude, :user_id)
 
+Backbone.sync = (function(original) {
+  return function(method, model, options) {
+    options.beforeSend = function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+    };
+    original(method, model, options);
+  };
+})(Backbone.sync);
+
 var Selfie = Backbone.Model.extend({
 
 	defaults: {
@@ -9,7 +18,8 @@ var Selfie = Backbone.Model.extend({
 		votes: 0,
 		latitude: 0,
 		longitude: 0,
-		user_id: 0
+		user_id: 0,
+		photobooth_image_data: ""
 	}
 });
 
@@ -28,14 +38,13 @@ var SelfieFormView = Backbone.View.extend({
 	},
 	getSelfieData: function(){
 		var imgElem = $('img')[0].src;
-		var selfieData = new Selfie({ json_analysis: imgElem});
+		var selfieData = new Selfie({ photobooth_image_data: imgElem});
 		return selfieData
 	},
 	submitCallback: function(e){
-		console.log("yoyoyoyoyoyoyoyoy");
 		e.preventDefault();
 		var selfieData = this.getSelfieData();
-		console.log("selfieData");
+		console.log(selfieData);
 		this.collection.create(selfieData);
 	}
 });
