@@ -4,7 +4,11 @@
   <title>KnowThySelfie</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	
+
+
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 	     <p class="notice"><%= notice %></p>
@@ -12,5 +16,9 @@
 
 <%= yield %>
 
+
+	<%= javascript_include_tag "/javascript/underscore.js" %>
+	<%= javascript_include_tag "/javascript/backbone.js" %>
+	<%= javascript_include_tag "/javascript/app.js" %>
 </body>
 </html>
