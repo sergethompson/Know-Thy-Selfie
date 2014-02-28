@@ -14,7 +14,7 @@ class SelfiesController < ApplicationController
 
 	def create
 		# Instead of using CarrierWave's temporary files, we're using our own
-		chart1 = params[:photobooth_image_data].split(',')
+		chart1 = selfie_params["photobooth_image_data"].split(',')
 		image = Base64.decode64(chart1[1])
 
 		tmp_filename = "#{Rails.root}/public/tmp/Selfie_" + DateTime.now.strftime("%Y%m%dT%H%M%S")+".png"
@@ -22,11 +22,15 @@ class SelfiesController < ApplicationController
 		File.open(tmp_filename, 'wb') do|f|
 		  f.write(image)
 		end
+		
+		# @selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],
+		# 													votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
+		# 			 										longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
 
-		respond_to do |format|
-			format.html {}
-			format.json { render json: @selfie}
-		end
+		# @selfie = Selfie.create({ image_url: "scootersURL_DATA", json_analysis: "scootersJSON_DATA",
+		# 	votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
+		# 	longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
+
 
 	    new_selfie = Selfie.new
 	    new_selfie.image_url = File.open(tmp_filename)
@@ -53,6 +57,13 @@ class SelfiesController < ApplicationController
 
 		# Cleaning up after ourselves
 		File.delete(tmp_filename)
+
+		respond_to do |format|
+			format.html {}
+			format.json { render json: @selfie}
+		end
+
+
 	end
 
 
@@ -65,21 +76,16 @@ class SelfiesController < ApplicationController
 		end
 	end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    #    def set_selfy
-    #   @selfy = Selfie.find(params[:id])
-    # end
     def set_selfie
-      @selfie = Selfie.find(params[:id])
+    	@selfie = Selfie.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
 
-    #params.require(:selfy).permit(:image_url... def selfy_params...      before 
     def selfie_params
-    	# params.require(:selfie).permit(:image_url, :json_analysis, :votes, :latitude, :longitude, :user_id)
-
-      params.permit(:json_analysis)
+    	params.require(:selfy).permit(:image_url, :json_analysis, :votes, :latitude, :longitude, :user_id, :photobooth_image_data)
     end
-end
+  end
