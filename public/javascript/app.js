@@ -1,5 +1,4 @@
-// ** Model **        (:image_url, :json_analysis, :votes,
-	//                   :latitude, :longitude, :user_id)
+// ** Model **  
 
 Backbone.sync = (function(original) {
   return function(method, model, options) {
@@ -13,7 +12,7 @@ Backbone.sync = (function(original) {
 var Selfie = Backbone.Model.extend({
 
 	defaults: {
-		image_url: ".s3",
+		image_url: "https://pbs.twimg.com/profile_images/378800000553651991/ac5d33362645c4f415a7933d3c296d70.jpeg",
 		json_analysis: "",
 		votes: 0,
 		latitude: 0,
