@@ -11,12 +11,15 @@ class SelfiesController < ApplicationController
 
 
 	def create
-#binding.pry
-		@selfie = Selfie.create(selfie_params)
+		#		@selfie = Selfie.create(selfie_params)
 		respond_to do |format|
 			format.html {}
 			format.json { render json: @selfie}
 		end
+
+		base_64_image_string = params["json_analysis"]
+	binding.pry
+
 	end
 
 

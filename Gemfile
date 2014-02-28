@@ -5,6 +5,12 @@ group :production do
   gem 'rails_12factor'
 end
 
+
+gem 'rmagick' # Ruby version of the ImageMagick library.  Needed for image manipulation (resizing)
+
+gem 'rekognize' #Image analysis library
+gem 'json' #Needed for data interaction
+
 gem 'pry'
 gem 'pry-rails'
 
