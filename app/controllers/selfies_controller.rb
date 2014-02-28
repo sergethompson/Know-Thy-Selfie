@@ -12,12 +12,12 @@ class SelfiesController < ApplicationController
 
 	def create
 		@selfie = Selfie.create(selfie_params)
+
 		respond_to do |format|
 			format.html {}
 			format.json { render json: @selfie}
 		end
 
-		base_64_image_string = params["json_analysis"]
 
 	end
 
@@ -56,8 +56,8 @@ class SelfiesController < ApplicationController
 
     #params.require(:selfy).permit(:image_url... def selfy_params...      before
     def selfie_params
-    	# params.require(:selfie).permit(:image_url, :json_analysis, :votes, :latitude, :longitude, :user_id)
+    	params.require(:selfy).permit(:image_url, :json_analysis, :votes, :latitude, :longitude, :user_id, :photobooth_image_data)
 
-      params.permit(:json_analysis)
+      #params.permit(:json_analysis)
     end
 end
