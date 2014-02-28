@@ -24,7 +24,7 @@
 $('#sendData').click(function(){
 var imgElem = $('img')[0].src.
 	replace(/^data:image\/(png|jpg);base64,/, "");
-var imgData = JSON.stringify(imgElem);
+var imgData = imgElem;//JSON.stringify(imgElem);
   $.ajax({
   url: '/selfies',
   beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
