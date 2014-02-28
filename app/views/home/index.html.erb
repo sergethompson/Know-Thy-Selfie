@@ -1,0 +1,52 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+		<title>Photobooth.js</title>
+	</head>
+	<body>
+			<!--<li><a href="#dataUrl" title="Data Url">Storing dataUrls as image</a></li>-->
+		<div id="wrapper">
+			<div id="example"></div>
+			<div id="gallery"></div>
+		</div>
+
+
+		<button id="sendData">Cool if works!</button>
+
+		<%= csrf_meta_tag %>
+
+
+
+
+<script>
+$('#sendData').click(function(){
+var imgElem = $('img')[0].src.
+	replace(/^data:image\/(png|jpg);base64,/, "");
+var imgData = imgElem;//JSON.stringify(imgElem);
+  $.ajax({
+  url: '/selfies',
+  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+  dataType: 'json',
+  data: {json_analysis: imgData},
+  type: 'POST',
+  success: function(data) {
+    console.log(data);
+    }
+  });
+});
+
+function getBase64Image(imgElem) {
+// imgElem must be on the same server otherwise a cross-origin error will be thrown "SECURITY_ERR: DOM Exception 18"
+
+    return imgElem.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+</script>
+
+
+
+
+	</body>
+</html>

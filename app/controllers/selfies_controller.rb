@@ -18,7 +18,6 @@ class SelfiesController < ApplicationController
 		end
 
 		base_64_image_string = params["json_analysis"]
-	binding.pry
 
 	end
 
@@ -55,7 +54,7 @@ class SelfiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
 
-    #params.require(:selfy).permit(:image_url... def selfy_params...      before 
+    #params.require(:selfy).permit(:image_url... def selfy_params...      before
     def selfie_params
     	# params.require(:selfie).permit(:image_url, :json_analysis, :votes, :latitude, :longitude, :user_id)
 
