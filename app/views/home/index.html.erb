@@ -23,14 +23,17 @@
 
 <script>
 $('#sendData').click(function(){
-var imgElem = $('img')[0].src.
-	replace(/^data:image\/(png|jpg);base64,/, "");
+
+	// Scooter: Removing the replace so that I get ALL the header information on the Rails side
+var imgElem = $('img')[0].src
+ //.
+	//replace(/^data:image\/(png|jpg);base64,/, "");
 var imgData = imgElem;//JSON.stringify(imgElem);
   $.ajax({
   url: '/selfies',
   beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
   dataType: 'json',
-  data: {json_analysis: imgData},
+  data: {photobooth_image_data: imgData},
   type: 'POST',
   success: function(data) {
     console.log(data);

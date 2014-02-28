@@ -30,13 +30,10 @@ ARGV.each { |file|
         }
     end
 
-   
     img.change_geometry('800x800') { |cols, rows, imginloop|
  		imginloop.resize!(cols, rows)
  	}
 
  	img.write(file + "_resized.jpg")
-
 }
-
 

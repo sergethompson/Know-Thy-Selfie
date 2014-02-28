@@ -5,7 +5,6 @@ group :production do
   gem 'rails_12factor'
 end
 
-
 gem 'rmagick' # Ruby version of the ImageMagick library.  Needed for image manipulation (resizing)
 
 gem 'rekognize' #Image analysis library
@@ -13,6 +12,10 @@ gem 'json' #Needed for data interaction
 
 gem 'pry'
 gem 'pry-rails'
+
+# Image uploading stuff
+gem 'carrierwave'
+gem 'fog', "~> 1.3.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
