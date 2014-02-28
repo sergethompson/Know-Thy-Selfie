@@ -17,6 +17,10 @@ gem 'json' #Needed for data interaction
 gem 'pry'
 gem 'pry-rails'
 
+# Image uploading stuff
+gem 'carrierwave'
+gem 'fog', "~> 1.3.1"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
