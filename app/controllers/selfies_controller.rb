@@ -12,10 +12,15 @@ class SelfiesController < ApplicationController
 
 	def create
 
+		photobooth_image_data = selfie_params["photobooth_image_data"]
+
 		@selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],
 															votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
 					 										longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
-		photobooth_image_data = selfie_params["photobooth_image_data"]
+
+		# @selfie = Selfie.create({ image_url: "scootersURL_DATA", json_analysis: "scootersJSON_DATA",
+		# 	votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
+		# 	longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
 
 		respond_to do |format|
 			format.html {}
@@ -47,21 +52,15 @@ class SelfiesController < ApplicationController
 
 
 
-  private
+	private
     # Use callbacks to share common setup or constraints between actions.
-    #    def set_selfy
-    #   @selfy = Selfie.find(params[:id])
-    # end
     def set_selfie
-      @selfie = Selfie.find(params[:id])
+    	@selfie = Selfie.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
 
-    #params.require(:selfy).permit(:image_url... def selfy_params...      before
     def selfie_params
     	params.require(:selfy).permit(:image_url, :json_analysis, :votes, :latitude, :longitude, :user_id, :photobooth_image_data)
-
-      #params.permit(:json_analysis)
     end
-end
+  end
