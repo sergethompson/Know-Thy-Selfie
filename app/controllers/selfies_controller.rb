@@ -53,6 +53,8 @@ class SelfiesController < ApplicationController
 
     #params.require(:selfy).permit(:image_url... def selfy_params...      before 
     def selfie_params
-      params.require(:selfie).permit(:image_url, :json_analysis, :votes, :latitude, :longitude, :user_id)
+    	# params.require(:selfie).permit(:image_url, :json_analysis, :votes, :latitude, :longitude, :user_id)
+
+      params.permit(:json_analysis)
     end
 end
