@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @selfy.image_url %>
+</p>
+
+<p>
+  <strong>Json analysis:</strong>
+  <%= @selfy.json_analysis %>
+</p>
+
+<p>
+  <strong>Votes:</strong>
+  <%= @selfy.votes %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @selfy.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @selfy.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_selfy_path(@selfy) %> |
+<%= link_to 'Back', selfies_path %>
