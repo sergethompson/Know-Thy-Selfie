@@ -27,10 +27,10 @@ class SelfiesController < ApplicationController
 		# 													votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
 		# 			 										longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
 
-		# @selfie = Selfie.create({ image_url: "scootersURL_DATA", json_analysis: "scootersJSON_DATA",
-		# 	votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
-		# 	longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
 
+		# photobooth_image_data = selfie_params["photobooth_image_data"]
+
+		# @selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],votes: selfie_params["votes"], latitude: selfie_params["latitude"],longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
 
 	    new_selfie = Selfie.new
 	    new_selfie.image_url = File.open(tmp_filename)
