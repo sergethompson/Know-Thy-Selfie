@@ -13,7 +13,7 @@ class SelfiesController < ApplicationController
 	def create
 
 		photobooth_image_data = selfie_params["photobooth_image_data"]
-
+		binding.pry
 		@selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],
 															votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
 					 										longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
@@ -39,18 +39,6 @@ class SelfiesController < ApplicationController
 			format.json {render json: @selfie}
 		end
 	end
-
-
-
-
-
-
-
-
-
-
-
-
 
 	private
     # Use callbacks to share common setup or constraints between actions.
