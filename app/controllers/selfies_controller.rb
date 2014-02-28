@@ -11,7 +11,7 @@ class SelfiesController < ApplicationController
 
 
 	def create
-		#		@selfie = Selfie.create(selfie_params)
+		@selfie = Selfie.create(selfie_params)
 		respond_to do |format|
 			format.html {}
 			format.json { render json: @selfie}
