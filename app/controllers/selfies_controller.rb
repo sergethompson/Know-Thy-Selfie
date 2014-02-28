@@ -11,6 +11,7 @@ class SelfiesController < ApplicationController
 
 
 	def create
+#binding.pry
 		@selfie = Selfie.create(selfie_params)
 		respond_to do |format|
 			format.html {}
