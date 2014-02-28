@@ -21,16 +21,36 @@ var SelfieCollection = Backbone.Collection.extend({
 	model: Selfie
 });
 
+
 var SelfieFormView = Backbone.View.extend({
 	events:{
 		'submit' : 'submitCallback'
 	},
 	getSelfieData: function(){
-		var selfieData = new Selfie({
-			
-		})
+		var imgElem = $('img')[0].src;
+		var selfieData = new Selfie({ json_analysis: imgElem});
+		return selfieData
+	},
+	submitCallback: function(e){
+		console.log("yoyoyoyoyoyoyoyoy");
+		e.preventDefault();
+		var selfieData = this.getSelfieData();
+		console.log("selfieData");
+		this.collection.create(selfieData);
 	}
-
-
-
 });
+
+$(function(){
+
+var selfies_collection = new SelfieCollection();
+
+var selfie_form_view = new SelfieFormView({collection: selfies_collection,
+ el: $('#selfie-form')})
+});
+
+
+
+
+
+
+
