@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20140226214948) do
 
   create_table "selfies", force: true do |t|
     t.string   "image_url"
+    t.string   "show_url"
     t.text     "json_analysis"
     t.integer  "votes"
     t.float    "latitude"

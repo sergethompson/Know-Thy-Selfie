@@ -28,19 +28,19 @@ class SelfiesController < ApplicationController
 		
 	    new_selfie = Selfie.new
 	    new_selfie.image_url = File.open(tmp_filename)
-		# This is intentional -- We can't perform the image analysis until the image is on S3
-		new_selfie.json_analysis = ""
-		new_selfie.save
 
-		#Now the image should be saved to S3.  At this point, we can send off the image information to our Rekognition analysis program to grab our analysis
+		# This is intentional -- We can't perform the image analysis until the image is on S3
+		@new_selfie.json_analysis = ""
+		#binding.pry
+		@new_selfie.save
+
+		#Now the image should be saved to S3.  At this point, we can send off the image information to our Rekognition api to grab our analysis
 		client = Rekognize::Client::Base.new(api_key: ENV['REKOGNIZE_API_KEY'], api_secret: ENV['REKOGNIZE_API_SECRET'])
 	
 		ret_val = ""
 		if (IMAGE_ANALYSIS)
 			ret_val = client.face_detect(urls: new_selfie.image_url, jobs: REKOGNIZE_JOBS)
 		end
-
-
 
 		new_selfie.json_analysis = JSON.generate(ret_val)
 binding.pry
@@ -54,7 +54,7 @@ binding.pry
 
 		respond_to do |format|
 			format.html {}
-			format.json { render json: @selfie}
+			format.json { render json: @new_selfie}
 		end
 
 
@@ -71,7 +71,8 @@ binding.pry
 	end
 
 
-  private
+	private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_selfie
     	@selfie = Selfie.find(params[:id])
