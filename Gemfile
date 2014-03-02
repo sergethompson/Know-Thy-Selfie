@@ -6,7 +6,8 @@ group :production do
 end
 
 group :test do
-  gem 'simplecov', :require => false #Gives percentage of code with test coverage
+  gem 'simplecov', '~> 0.7.1', :require => false #Gives percentage of code with test coverage
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 gem 'rmagick' # Ruby version of the ImageMagick library.  Needed for image manipulation (resizing)
