@@ -1,0 +1,79 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/Brad/Documents/ga_wdi/projects/Know-Thy-Selfie/app/models/user.rb": [
+        1,
+        null,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/Users/Brad/Documents/ga_wdi/projects/Know-Thy-Selfie/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/Brad/Documents/ga_wdi/projects/Know-Thy-Selfie/app/models/selfie.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/Brad/Documents/ga_wdi/projects/Know-Thy-Selfie/app/uploaders/image_on_aws_uploader.rb": [
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1393720572
+  }
+}
