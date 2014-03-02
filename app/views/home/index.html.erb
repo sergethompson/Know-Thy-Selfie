@@ -1,29 +1,52 @@
 <!DOCTYPE>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-		<title>Photobooth.js</title>
-	</head>
-	<body>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+	<title>Photobooth.js</title>
+</head>
+<body>
 
-		<div id="wrapper">
-			<div id="example"></div>
-			<div id="gallery"></div>
+	<div id="wrapper">
+		<div id="example"></div>
+		<div id="gallery"></div>
+	</div>
+	<br>
+
+
+	<form id="selfie-form">
+		<div class="centered">
+			<button class="btn btn-large btn-warning center" type="submit">Click to Submit Selfie!!!
+			</button>
 		</div>
+	</form>
 
-
-		<form id="selfie-form">
-				<button type="submit">Cool if works!</button>
-				
-		</form>
-
-
-		<%= csrf_meta_tag %>
+	<br>
+	<div class="centered" id="selfies-list"></div>
 
 
 
 
+	<script id="selfieview-template" type='text/template'>
+	<div class="selfie">
+		<img class="rounded" id="show" src="<%%= show_url %>">
+		<p>
+			<%%= json_analysis %>
+		</p>
+		<div id="stats-view"></div>
+		<button data-action="destroy">Delete</button>
+	</div>
+	</script>
+
+
+
+	<script id="selfieview-stats-template" type='text/template'>
+	<div class="stats">
+		<h3>
+			<%%= votes %>
+		</h3>
+	</div>
+	</script>
 
 
 
@@ -33,29 +56,8 @@
 
 
 
+	<%= csrf_meta_tag %>
 
-	</body>
+</body>
 </html>
-<!--
-<script>
-$('#sendData').click(function(){
 
-	// Scooter: Removing the replace so that I get ALL the header information on the Rails side
-var imgElem = $('img')[0].src
- //.
-	//replace(/^data:image\/(png|jpg);base64,/, "");
-var imgData = imgElem;//JSON.stringify(imgElem);
-  $.ajax({
-  url: '/selfies',
-  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-  dataType: 'json',
-  data: {photobooth_image_data: imgData},
-  type: 'POST',
-  success: function(data) {
-    console.log(data);
-    }
-  });
-});
-
-
-</script>-->

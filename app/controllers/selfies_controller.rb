@@ -52,6 +52,8 @@ class SelfiesController < ApplicationController
 		end
 
 		new_selfie.json_analysis = JSON.generate(ret_val)
+		
+		new_selfie.show_url   = JSON.parse(new_selfie.json_analysis)["url"]
 		new_selfie.votes = 0
 	    new_selfie.latitude = 40.7403775 #TODO: grab from Photo if available
 	    new_selfie.longitude = -73.9909667 #TODO: grab from Photo if available

@@ -1,5 +1,5 @@
-// ** Model **  
 
+// Fix security concerns with rails
 Backbone.sync = (function(original) {
   return function(method, model, options) {
     options.beforeSend = function(xhr) {
@@ -9,10 +9,20 @@ Backbone.sync = (function(original) {
   };
 })(Backbone.sync);
 
+//Fix underscore problems with erb
+
+// _.templateSettings = {
+//     interpolate: /\{\{\=(.+?)\}\}/g,
+//     evaluate: /\{\{(.+?)\}\}/g
+// };
+
+// ** Model **  
+
 var Selfie = Backbone.Model.extend({
 
 	defaults: {
-		image_url: "https://pbs.twimg.com/profile_images/378800000553651991/ac5d33362645c4f415a7933d3c296d70.jpeg",
+		show_url: "https://pbs.twimg.com/profile_images/378800000553651991/ac5d33362645c4f415a7933d3c296d70.jpeg",
+		image_url: "",
 		json_analysis: "",
 		votes: 0,
 		latitude: 0,
@@ -49,38 +59,52 @@ var SelfieFormView = Backbone.View.extend({
 });
 
 
-// var SelfieView = Backbone.View.extend({
-// 	initialize: function(){
-// 		this.listenTo(this.model, 'remove', this.remove)
-// 	},
-// 	events: {
-// 		"click [data-action='destroy']" : 'destroy',
-// 		'click [id="show"]' : 'show'
-// 	},
-// 	tagnName: 'div',
+var SelfieView = Backbone.View.extend({
+	initialize: function(){
+		this.listenTo(this.model, 'remove', this.remove)
+	},
+	events: {
+		"click [data-action='destroy']" : 'destroy',
+		'click [id="show"]' : 'show'
+	},
+	tagnName: 'div',
 
-// 	template_selfie: _.template( $("#selfieview-template").html() ),
-// 	template_selfie_stats: _.template( $("#selfieview-stats-template")),
+	template_selfie: _.template( $("#selfieview-template").html() ),
+	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
-// 	render: function(){
-// 		this.$el.html(this.template_selfie( this.model.attributes ) );
-// 		return this
-// 	},
-// 	show: function(e) {
-// 		e.preventDefault();
-// 		this.$("#")/////////////////////////
-// 	}
+	render: function(){
+		this.$el.html(this.template_selfie( this.model.attributes ) );
+		return this
+	},
+	show: function(e) {
+		e.preventDefault();
+		this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
+	},
+	destroy: function(e){
+		e.preventDefault();
+		this.model.destroy();
+	}
 
 
-// })
+});
+
+var SelfieListView = Backbone.View.extend({
+	initialize: function(){
+		this.listenTo(this.collection, 'add', this.renderSelfie)
+	},
+	renderSelfie: function(instance_of_selfie){
+		instance_of_selfie.view = new SelfieView({model: instance_of_selfie})
+		this.$el.prepend( instance_of_selfie.view.render().el)
+		return this;
+	}
+})
 
 
 
 
 $(function(){
-
 var selfies_collection = new SelfieCollection();
-
+var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
 var selfie_form_view = new SelfieFormView({collection: selfies_collection,
  el: $('#selfie-form')})
 });
