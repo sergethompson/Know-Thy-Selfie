@@ -74,6 +74,9 @@ var SelfieView = Backbone.View.extend({
 
 	render: function(){
 		this.$el.html(this.template_selfie( this.model.attributes ) );
+		console.log(this);
+		console.log(this.model.get("json_analysis"));
+		console.log(this.model.get("json_analysis").confidence);
 		return this
 	},
 	show: function(e) {
