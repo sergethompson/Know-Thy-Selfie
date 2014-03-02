@@ -9,6 +9,7 @@ group :test do
   gem 'simplecov', :require => false #Gives percentage of code with test coverage
 end
 
+
 gem 'rmagick' # Ruby version of the ImageMagick library.  Needed for image manipulation (resizing)
 
 gem 'rekognize' #Image analysis library

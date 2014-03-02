@@ -1,4 +1,7 @@
 IMAGE_ANALYSIS = true
+REKOGNIZE_JOBS = "face_detect_gender_race_emotion_face_recognize"
+#REKOGNIZE_JOBS = "face_age_eye_closed_gender_race_emotion_face_recognize"
+#REKOGNIZE_JOBS = "face_recognize"
 
 class SelfiesController < ApplicationController
 
@@ -23,18 +26,8 @@ class SelfiesController < ApplicationController
 		  f.write(image)
 		end
 		
-		# @selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],
-		# 													votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
-		# 			 										longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
-
-
-		# photobooth_image_data = selfie_params["photobooth_image_data"]
-
-		# @selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],votes: selfie_params["votes"], latitude: selfie_params["latitude"],longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
-
 	    new_selfie = Selfie.new
 	    new_selfie.image_url = File.open(tmp_filename)
-
 		# This is intentional -- We can't perform the image analysis until the image is on S3
 		new_selfie.json_analysis = ""
 		new_selfie.save
@@ -42,14 +35,15 @@ class SelfiesController < ApplicationController
 		#Now the image should be saved to S3.  At this point, we can send off the image information to our Rekognition analysis program to grab our analysis
 		client = Rekognize::Client::Base.new(api_key: ENV['REKOGNIZE_API_KEY'], api_secret: ENV['REKOGNIZE_API_SECRET'])
 	
-		job = "face_detect_gender_race_emotion"
-
 		ret_val = ""
 		if (IMAGE_ANALYSIS)
-			ret_val = client.face_detect(urls: new_selfie.image_url, jobs: job)
+			ret_val = client.face_detect(urls: new_selfie.image_url, jobs: REKOGNIZE_JOBS)
 		end
 
+
+
 		new_selfie.json_analysis = JSON.generate(ret_val)
+binding.pry
 		new_selfie.votes = 0
 	    new_selfie.latitude = 40.7403775 #TODO: grab from Photo if available
 	    new_selfie.longitude = -73.9909667 #TODO: grab from Photo if available
