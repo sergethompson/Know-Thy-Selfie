@@ -23,20 +23,22 @@ class SelfiesController < ApplicationController
 		  f.write(image)
 		end
 		
-		# @selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],
-		# 													votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
-		# 			 										longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
 
 
-		# photobooth_image_data = selfie_params["photobooth_image_data"]
 
-		# @selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],votes: selfie_params["votes"], latitude: selfie_params["latitude"],longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
+# 		photobooth_image_data = selfie_params["photobooth_image_data"]
+# 		binding.pry
+# 		@selfie = Selfie.create({ image_url: selfie_params["image_url"], json_analysis: selfie_params["json_analysis"],
+# 															votes: selfie_params["votes"], latitude: selfie_params["latitude"], 
+# 					 										longitude: selfie_params["longitude"], user_id: selfie_params["user_id"] });
+
 
 	    new_selfie = Selfie.new
 	    new_selfie.image_url = File.open(tmp_filename)
 
 		# This is intentional -- We can't perform the image analysis until the image is on S3
 		new_selfie.json_analysis = ""
+		#binding.pry
 		new_selfie.save
 
 		#Now the image should be saved to S3.  At this point, we can send off the image information to our Rekognition analysis program to grab our analysis
@@ -54,6 +56,7 @@ class SelfiesController < ApplicationController
 	    new_selfie.latitude = 40.7403775 #TODO: grab from Photo if available
 	    new_selfie.longitude = -73.9909667 #TODO: grab from Photo if available
 		new_selfie.save
+
 
 		# Cleaning up after ourselves
 		File.delete(tmp_filename)
@@ -77,7 +80,8 @@ class SelfiesController < ApplicationController
 	end
 
 
-  private
+	private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_selfie
     	@selfie = Selfie.find(params[:id])

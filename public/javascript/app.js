@@ -36,7 +36,7 @@ var SelfieFormView = Backbone.View.extend({
 		'submit' : 'submitCallback'
 	},
 	getSelfieData: function(){
-		var imgElem = $('img')[0].src;
+		var imgElem = $('#gallery img')[0].src;
 		var selfieData = new Selfie({ photobooth_image_data: imgElem});
 		return selfieData
 	},
@@ -47,6 +47,35 @@ var SelfieFormView = Backbone.View.extend({
 		this.collection.create(selfieData);
 	}
 });
+
+
+// var SelfieView = Backbone.View.extend({
+// 	initialize: function(){
+// 		this.listenTo(this.model, 'remove', this.remove)
+// 	},
+// 	events: {
+// 		"click [data-action='destroy']" : 'destroy',
+// 		'click [id="show"]' : 'show'
+// 	},
+// 	tagnName: 'div',
+
+// 	template_selfie: _.template( $("#selfieview-template").html() ),
+// 	template_selfie_stats: _.template( $("#selfieview-stats-template")),
+
+// 	render: function(){
+// 		this.$el.html(this.template_selfie( this.model.attributes ) );
+// 		return this
+// 	},
+// 	show: function(e) {
+// 		e.preventDefault();
+// 		this.$("#")/////////////////////////
+// 	}
+
+
+// })
+
+
+
 
 $(function(){
 
