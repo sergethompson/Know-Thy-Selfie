@@ -30,9 +30,14 @@
 	<script id="selfieview-template" type='text/template'>
 	<div class="selfie">
 		<img class="rounded" id="show" src="<%%= show_url %>">
-		<p>
-			<%%= json_analysis %>
-		</p>
+		<ul>
+			<li>
+				<h2>Caption: <%%= caption %></h2>
+			</li>
+			<li>
+				Analysis dump: <%%= json_analysis %>
+			</li>	
+		</ul>
 		<div id="stats-view"></div>
 		<button data-action="destroy">Delete</button>
 	</div>

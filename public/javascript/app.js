@@ -22,6 +22,7 @@ var Selfie = Backbone.Model.extend({
 
 	defaults: {
 		show_url: "https://pbs.twimg.com/profile_images/378800000553651991/ac5d33362645c4f415a7933d3c296d70.jpeg",
+		caption: "Mysteriously empty caption",
 		image_url: "",
 		json_analysis: "",
 		votes: 0,
@@ -93,7 +94,6 @@ var SelfieListView = Backbone.View.extend({
 		this.listenTo(this.collection, 'add', this.renderSelfie)
 	},
 	renderSelfie: function(instance_of_selfie){
-console.log("RENDERSELFIECALLED!!!");
 		instance_of_selfie.view = new SelfieView({model: instance_of_selfie})
 		this.$el.prepend( instance_of_selfie.view.render().el)
 		return this;

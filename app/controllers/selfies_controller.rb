@@ -86,15 +86,21 @@ class SelfiesController < ApplicationController
 		#ERROR
 		if (json_analysis.has_key?("face_detection") == false)
 			#We have a problem houston!  No face detection happened!
-			return "Did not recognize a face #{__LINE__}"
+			return "Did not recognize a face #{__FILE__}:{__LINE__}"
 		end
 
 		if (json_analysis["face_detection"].length < 1)
 			#We have a problem...  There WAS a face detected but there's no pose
-			return "Did not recognize a face #{__LINE__}"
+			return "Did not recognize a face #{__FILE__}:{__LINE__}"
 		end
 
 		face = json_analysis["face_detection"][0]
+
+		if (face["age"] > 26)
+			ret_string = "New York selfies average a bit older"
+		elsif (face["age"] < 23.3)
+			ret_string = "The selfies in Sao Paulo tend to skew very young"
+		end
 
 		if (face["pose"]["roll"].abs > 8) #Head tilted to the side
 			ret_string = "Nice tilt!  Are you from Sao Paulo?"
@@ -104,12 +110,6 @@ class SelfiesController < ApplicationController
 			ret_string = "Japanese selfies tend to look down"
 		end
 
-
-		if (face["age"] > 26)
-			ret_string = "New York selfies average a bit older"
-		elsif (face["age"] < 23.3)
-			ret_string = "The selfies in Sao Paulo tend to skew very young"
-		end
 
 		if (face["emotion"].has_key?("happy"))		
 			if (face["emotion"]["happy"] > 50)
