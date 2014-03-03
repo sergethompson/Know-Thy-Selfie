@@ -23,6 +23,7 @@ var Selfie = Backbone.Model.extend({
 
 	defaults: {
 		show_url: "https://pbs.twimg.com/profile_images/378800000553651991/ac5d33362645c4f415a7933d3c296d70.jpeg",
+		caption: "Mysteriously empty caption",
 		image_url: "",
 		json_analysis: "",
 		votes: 0,
@@ -68,7 +69,7 @@ var SelfieView = Backbone.View.extend({
 		"click [data-action='destroy']" : 'destroy',
 		'click [id="show"]' : 'show'
 	},
-	tagnName: 'div',
+	tagName: 'div',
 
 	template_selfie: _.template( $("#selfieview-template").html() ),
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
