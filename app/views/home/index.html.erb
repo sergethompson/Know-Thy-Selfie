@@ -35,25 +35,24 @@
 
 
 	<br>
-	<div class="centered" id="selfies-list"></div>
+	<div class="centered row" id="selfies-list"></div>
 
 
 
 
 	<script id="selfieview-template" type='text/template'>
+	<div class="col-md-3">
 	<div class="selfie">
 		<img class="rounded" id="show" src="<%%= show_url %>">
 		<ul>
 			<li>
 				<h2>Caption: <%%= caption %></h2>
 			</li>
-			<li>
-				Analysis dump: <%%= json_analysis %>
-			</li>	
 		</ul>
 		<div id="stats-view"></div>
 		<button id="show">Show Votes</button>
 		<button data-action="destroy">Delete</button>
+	</div>
 	</div>
 	</script>
 
