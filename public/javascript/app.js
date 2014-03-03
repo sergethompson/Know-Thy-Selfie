@@ -1,3 +1,5 @@
+var dino_data = [{"name":"ACROCANTHOSAURUS","weight":4000}];
+var organized = 0
 
 // Sets zindex outside functions to be used later unrestricted
 var zindex = 1;
@@ -24,7 +26,23 @@ var Selfie = Backbone.Model.extend({
 		latitude: 0,
 		longitude: 0,
 		user_id: 0,
-		photobooth_image_data: ""
+		photobooth_image_data: "",
+		age: 0,
+		race_string: "",
+		race_conf: 0,
+		confused: 0,
+		calm: 0,
+		angry: 0,
+		happy: 0,
+		sad: 0,
+		roll: 0,
+		pitch: 0,
+		yaw: 0,
+		smile: 0,
+		sex: 0,
+		surprised: 0,
+		eye_closed: 0,
+		glasses: 0
 	}
 });
 // ** Collection **
@@ -75,7 +93,9 @@ var SelfieView = Backbone.View.extend({
 		var top = Math.random()*150+'px';
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
-		this.$el
+		if (organized === 0)
+  {
+  this.$el
 		.css('-webkit-transform' , 'rotate('+rot+')')
 			.css('-moz-transform' , 'rotate('+rot+')')
 			.css('top' , left)
@@ -98,6 +118,7 @@ var SelfieView = Backbone.View.extend({
 		console.log(this);
 		console.log(this.model.get("json_analysis").url);
 		console.log(this.model.get("json_analysis").url);
+  }
 		return this
 	},
 

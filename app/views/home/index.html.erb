@@ -3,7 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-	<title>Photobooth.js</title>
+	<link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+	<title>Know Thy Selfie</title>
 </head>
 <body>
 	<div id="slideout">
@@ -26,19 +27,18 @@
 	<div class="centered row" id="selfies-list"></div>
 
 
+
 	<script id="selfieview-template" type='text/template'>
 		<div class="col-md-3">
-		<div class="selfie">
-			<img class="rounded" id="show" src="<%%= show_url %>">
-			<ul>
-				<li>
-					<h2><%%= caption %></h2>
-				</li>
-			</ul>
-			<div id="stats-view"></div>
-			<button id="show">Show Votes</button>
-			<button data-action="destroy">Delete</button>
-		</div>
+			<div class="selfie">
+				<img class="selfie-image" id="show" src="<%%= show_url %>">
+				<div class="caption">
+					<h2 style="font-family: 'Permanent Marker', cursive;">Caption: <%%= caption %></h2>
+					<div id="stats-view"></div>
+					<button id="show">Show Votes</button>
+					<button data-action="destroy">Delete</button>
+				</div>
+			</div>
 		</div>
 	</script>
 
@@ -46,15 +46,17 @@
 	<script id="selfieview-stats-template" type='text/template'>
 		<div class="stats">
 			<h3>
-				<%%= votes %>
+				<%%= glasses %>
 			</h3>
 		</div>
+		<section id='dino-field'></section>
 	</script>
 
 
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.min.js"></script>
 
 	<%= csrf_meta_tag %>
 
