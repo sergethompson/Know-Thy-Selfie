@@ -6,72 +6,54 @@
 	<title>Photobooth.js</title>
 </head>
 <body>
-
-
-
-
-<div id="slideout">
-  <h4 id='tab'>Camera</h4>
-  <div id="slideout_inner">
-<div id="wrapper">
-		<div id="example"></div>
-		<div id="gallery"></div>
-	</div>
-		<form id="selfie-form">
-		<div class="centered">
-			<button class="btn btn-large btn-warning center" type="submit">Click to Submit Selfie!!!
-			</button>
+	<div id="slideout">
+	  	<h4 id='tab'>Camera</h4>
+	  	<div id="slideout_inner">
+		<div id="wrapper">
+			<div id="example"></div>
+			<div id="gallery"></div>
 		</div>
-	</form>
-  </div>
-</div>
+		<form id="selfie-form">
+			<div class="centered">
+				<button class="btn btn-large btn-warning center" type="submit">Click to Submit Selfie!!!</button>
+			</div>
+		</form>
+	  </div>
+	</div>
 
-
-
-	
 	<br>
-
-
-
-
 	<br>
 	<div class="centered row" id="selfies-list"></div>
 
 
-
-
 	<script id="selfieview-template" type='text/template'>
-	<div class="col-md-3">
-	<div class="selfie">
-		<img class="rounded" id="show" src="<%%= show_url %>">
-		<ul>
-			<li>
-				<h2>Caption: <%%= caption %></h2>
-			</li>
-		</ul>
-		<div id="stats-view"></div>
-		<button id="show">Show Votes</button>
-		<button data-action="destroy">Delete</button>
-	</div>
-	</div>
+		<div class="col-md-3">
+		<div class="selfie">
+			<img class="rounded" id="show" src="<%%= show_url %>">
+			<ul>
+				<li>
+					<h2><%%= caption %></h2>
+				</li>
+			</ul>
+			<div id="stats-view"></div>
+			<button id="show">Show Votes</button>
+			<button data-action="destroy">Delete</button>
+		</div>
+		</div>
 	</script>
-
 
 
 	<script id="selfieview-stats-template" type='text/template'>
-	<div class="stats">
-		<h3>
-			<%%= votes %>
-		</h3>
-	</div>
+		<div class="stats">
+			<h3>
+				<%%= votes %>
+			</h3>
+		</div>
 	</script>
 
 
 
-
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
 
 	<%= csrf_meta_tag %>
