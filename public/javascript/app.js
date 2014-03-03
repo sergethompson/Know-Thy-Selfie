@@ -1,4 +1,6 @@
 
+// Sets zindex outside functions to be used later unrestricted
+var zindex = 1;
 // Fix security concerns with rails
 Backbone.sync = (function(original) {
   return function(method, model, options) {
@@ -8,13 +10,6 @@ Backbone.sync = (function(original) {
     original(method, model, options);
   };
 })(Backbone.sync);
-
-//Fix underscore problems with erb
-
-// _.templateSettings = {
-//     interpolate: /\{\{\=(.+?)\}\}/g,
-//     evaluate: /\{\{(.+?)\}\}/g
-// };
 
 // ** Model **  
 
@@ -32,7 +27,7 @@ var Selfie = Backbone.Model.extend({
 		photobooth_image_data: ""
 	}
 });
-
+// ** Collection **
 var SelfieCollection = Backbone.Collection.extend({
 	url: '/selfies',
 	initialize: function(){
@@ -41,7 +36,7 @@ var SelfieCollection = Backbone.Collection.extend({
 	model: Selfie
 });
 
-
+// ** Submit Button for adding selfie to collection **
 var SelfieFormView = Backbone.View.extend({
 	events:{
 		'submit' : 'submitCallback'
@@ -59,7 +54,7 @@ var SelfieFormView = Backbone.View.extend({
 	}
 });
 
-
+// ** Selfie View and setting actions on view (movable, alignable, clickable) **
 var SelfieView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.model, 'remove', this.remove)
@@ -75,7 +70,33 @@ var SelfieView = Backbone.View.extend({
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
+	var rot = Math.random()*30-15+'deg';
+  var left = Math.random()*50+'px';
+  var top = Math.random()*150+'px';
 		this.$el.html(this.template_selfie( this.model.attributes ) );
+		this.$el
+		.css('-webkit-transform' , 'rotate('+rot+')')
+			.css('-moz-transform' , 'rotate('+rot+')')
+			.css('top' , left)
+			.css('left' , top)
+			.draggable({
+  			start: function(event, ui) {
+   			zindex++;
+   			var cssObj = { 'z-index' : zindex };
+   			$(this).css(cssObj);
+  			}
+ 			})
+ 			.mouseup(function(){
+ 				zindex++;
+ 				$(this).css('z-index' , zindex);
+ 			})
+ 			.dblclick(function(){
+  			$(this).css('-webkit-transform' , 'rotate(0)');
+  			$(this).css('-moz-transform' , 'rotate(0)');
+}			);
+		console.log(this);
+		console.log(this.model.get("json_analysis").url);
+		console.log(this.model.get("json_analysis").url);
 		return this
 	},
 
@@ -89,6 +110,7 @@ var SelfieView = Backbone.View.extend({
 	}
 });
 
+// ** List View **
 var SelfieListView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.collection, 'add', this.renderSelfie)
@@ -100,9 +122,7 @@ var SelfieListView = Backbone.View.extend({
 	}
 })
 
-
-
-
+// ** Document Ready ** 
 $(function(){
 	var selfies_collection = new SelfieCollection();
 	var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
