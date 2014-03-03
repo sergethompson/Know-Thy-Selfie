@@ -1,5 +1,10 @@
 == README
 
+==Required Environment Variables
+*AWS_ACCESS_KEY_ID
+*AWS_SECRET_ACCESS_KEY
+*AWS_BUCKET
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

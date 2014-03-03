@@ -14,6 +14,10 @@
  */
 
 
+body{
+	background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");
+}
+
 .centered
 {
     text-align:center;
