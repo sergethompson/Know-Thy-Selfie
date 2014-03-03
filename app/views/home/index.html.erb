@@ -8,60 +8,56 @@
 	<body>
 
 		<div id="wrapper">
-			<input type="image" title="take picture" class="trigger" src="http://i.imgur.com/8ohHUmC.png">
-			<div id="flash"></div>
-			<img src="http://i.imgur.com/yB6sldl.png" id="upper-polaroid">
-			<div id="pic-fade"></div>
-			<div id="gallery"></div>
-			<img id="camera" src='http://i.imgur.com/uRpVYIg.png'>
-
 			<div id="example"></div>
+			<div id="gallery"></div>
 		</div>
+		<br>
 
 
 		<form id="selfie-form">
-				<button type="submit">Cool if works!</button>
-
+			<div class="centered">
+				<button class="btn btn-large btn-warning center" type="submit">Click to Submit Selfie!!!
+				</button>
+			</div>
 		</form>
 
-
-		<%= csrf_meta_tag %>
-
-
+		<br>
+		<div class="centered" id="selfies-list"></div>
 
 
 
 
+	<script id="selfieview-template" type='text/template'>
+	<div class="selfie">
+		<img class="rounded" id="show" src="<%%= show_url %>">
+		<p>
+			<%%= json_analysis %>
+		</p>
+		<div id="stats-view"></div>
+		<button data-action="destroy">Delete</button>
+	</div>
+	</script>
 
 
 
+	<script id="selfieview-stats-template" type='text/template'>
+	<div class="stats">
+		<h3>
+			<%%= votes %>
+		</h3>
+	</div>
+	</script>
+
+	<input type="image" title="take picture" class="trigger" src="http://i.imgur.com/8ohHUmC.png">
+	<div id="flash"></div>
+	<img src="http://i.imgur.com/yB6sldl.png" id="upper-polaroid">
+	<div id="pic-fade"></div>
+
+	<img id="camera" src='http://i.imgur.com/uRpVYIg.png'>
 
 
+	<%= csrf_meta_tag %>
 
-
-
-	</body>
+</body>
 </html>
-<!--
-<script>
-$('#sendData').click(function(){
 
-	// Scooter: Removing the replace so that I get ALL the header information on the Rails side
-var imgElem = $('img')[0].src
- //.
-	//replace(/^data:image\/(png|jpg);base64,/, "");
-var imgData = imgElem;//JSON.stringify(imgElem);
-  $.ajax({
-  url: '/selfies',
-  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-  dataType: 'json',
-  data: {photobooth_image_data: imgData},
-  type: 'POST',
-  success: function(data) {
-    console.log(data);
-    }
-  });
-});
-
-
-</script>-->
