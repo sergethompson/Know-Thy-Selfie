@@ -1,4 +1,5 @@
 
+// Sets zindex outside functions to be used later unrestricted
 var zindex = 1;
 // Fix security concerns with rails
 Backbone.sync = (function(original) {
@@ -9,13 +10,6 @@ Backbone.sync = (function(original) {
     original(method, model, options);
   };
 })(Backbone.sync);
-
-//Fix underscore problems with erb
-
-// _.templateSettings = {
-//     interpolate: /\{\{\=(.+?)\}\}/g,
-//     evaluate: /\{\{(.+?)\}\}/g
-// };
 
 // ** Model **  
 
@@ -33,7 +27,7 @@ var Selfie = Backbone.Model.extend({
 		photobooth_image_data: ""
 	}
 });
-
+// ** Collection **
 var SelfieCollection = Backbone.Collection.extend({
 	url: '/selfies',
 	initialize: function(){
@@ -42,7 +36,7 @@ var SelfieCollection = Backbone.Collection.extend({
 	model: Selfie
 });
 
-
+// ** Submit Button for adding selfie to collection **
 var SelfieFormView = Backbone.View.extend({
 	events:{
 		'submit' : 'submitCallback'
@@ -60,7 +54,7 @@ var SelfieFormView = Backbone.View.extend({
 	}
 });
 
-
+// ** Selfie View and setting actions on view (movable, alignable, clickable) **
 var SelfieView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.model, 'remove', this.remove)
@@ -113,7 +107,7 @@ var SelfieView = Backbone.View.extend({
 		this.model.destroy();
 	}
 
-
+// ** List View **
 });
 
 var SelfieListView = Backbone.View.extend({
@@ -127,9 +121,7 @@ var SelfieListView = Backbone.View.extend({
 	}
 })
 
-
-
-
+// ** Document Ready ** 
 $(function(){
 var selfies_collection = new SelfieCollection();
 var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
