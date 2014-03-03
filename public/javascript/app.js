@@ -70,9 +70,10 @@ var SelfieView = Backbone.View.extend({
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
-	var rot = Math.random()*30-15+'deg';
-  var left = Math.random()*50+'px';
-  var top = Math.random()*150+'px';
+		var rot = Math.random()*30-15+'deg';
+  		var left = Math.random()*50+'px';
+		var top = Math.random()*150+'px';
+
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		this.$el
 		.css('-webkit-transform' , 'rotate('+rot+')')
@@ -91,9 +92,9 @@ var SelfieView = Backbone.View.extend({
  				$(this).css('z-index' , zindex);
  			})
  			.dblclick(function(){
-  			$(this).css('-webkit-transform' , 'rotate(0)');
-  			$(this).css('-moz-transform' , 'rotate(0)');
-}			);
+	  			$(this).css('-webkit-transform' , 'rotate(0)');
+	  			$(this).css('-moz-transform' , 'rotate(0)');
+			});
 		console.log(this);
 		console.log(this.model.get("json_analysis").url);
 		console.log(this.model.get("json_analysis").url);
