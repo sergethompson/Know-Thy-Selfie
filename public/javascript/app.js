@@ -67,7 +67,7 @@ var SelfieView = Backbone.View.extend({
 		"click [data-action='destroy']" : 'destroy',
 		'click [id="show"]' : 'show'
 	},
-	tagnName: 'div',
+	tagName: 'div',
 
 	template_selfie: _.template( $("#selfieview-template").html() ),
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
@@ -93,6 +93,7 @@ var SelfieListView = Backbone.View.extend({
 		this.listenTo(this.collection, 'add', this.renderSelfie)
 	},
 	renderSelfie: function(instance_of_selfie){
+console.log("RENDERSELFIECALLED!!!");
 		instance_of_selfie.view = new SelfieView({model: instance_of_selfie})
 		this.$el.prepend( instance_of_selfie.view.render().el)
 		return this;
