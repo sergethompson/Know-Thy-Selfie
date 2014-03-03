@@ -29,11 +29,12 @@
 
 	<script id="selfieview-template" type='text/template'>
 	<div class="selfie">
-		<img class="rounded" id="show" src="<%%= show_url %>">
+		<img class="rounded" src="<%%= show_url %>">
 		<p>
 			<%%= json_analysis %>
 		</p>
 		<div id="stats-view"></div>
+		<button id="show">Show Votes</button>
 		<button data-action="destroy">Delete</button>
 	</div>
 	</script>
@@ -53,7 +54,7 @@
 
 
 
-
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
 
 	<%= csrf_meta_tag %>

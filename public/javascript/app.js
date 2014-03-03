@@ -1,4 +1,5 @@
 
+var zindex = 1;
 // Fix security concerns with rails
 Backbone.sync = (function(original) {
   return function(method, model, options) {
@@ -73,10 +74,33 @@ var SelfieView = Backbone.View.extend({
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
+	var rot = Math.random()*30-15+'deg';
+  var left = Math.random()*50+'px';
+  var top = Math.random()*150+'px';
 		this.$el.html(this.template_selfie( this.model.attributes ) );
+		this.$el
+		.css('-webkit-transform' , 'rotate('+rot+')')
+			.css('-moz-transform' , 'rotate('+rot+')')
+			.css('top' , left)
+			.css('left' , top)
+			.draggable({
+  			start: function(event, ui) {
+   			zindex++;
+   			var cssObj = { 'z-index' : zindex };
+   			$(this).css(cssObj);
+  			}
+ 			})
+ 			.mouseup(function(){
+ 				zindex++;
+ 				$(this).css('z-index' , zindex);
+ 			})
+ 			.dblclick(function(){
+  			$(this).css('-webkit-transform' , 'rotate(0)');
+  			$(this).css('-moz-transform' , 'rotate(0)');
+}			);
 		console.log(this);
-		console.log(this.model.get("json_analysis"));
-		console.log(this.model.get("json_analysis").confidence);
+		console.log(this.model.get("json_analysis").url);
+		console.log(this.model.get("json_analysis").url);
 		return this
 	},
 	show: function(e) {
