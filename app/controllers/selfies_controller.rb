@@ -62,11 +62,10 @@ class SelfiesController < ApplicationController
 
 		# Cleaning up after ourselves
 		File.delete(tmp_filename)
+		binding.pry
 
-		respond_to do |format|
-			format.html {}
-			format.json { render json: new_selfie}
-		end
+		 render json: new_selfie
+		
 
 
 	end

@@ -31,7 +31,7 @@ var Selfie = Backbone.Model.extend({
 var SelfieCollection = Backbone.Collection.extend({
 	url: '/selfies',
 	initialize: function(){
-		this.fetch()
+		
 	},
 	model: Selfie
 });
@@ -48,9 +48,18 @@ var SelfieFormView = Backbone.View.extend({
 	},
 	submitCallback: function(e){
 		e.preventDefault();
-		var selfieData = this.getSelfieData();
-		console.log(selfieData);
-		this.collection.create(selfieData);
+		// var selfieData = this.getSelfieData();
+		// console.log(selfieData);
+		// this.collection.create(selfieData);
+		// {
+		// 	success: function(data){
+		// 		console.log(data, "Just added to DB!!!!")
+		// 	}
+		// }
+		this.collection.create({
+		 	photobooth_image_data: $('#gallery img')[0].src
+		})
+
 	}
 });
 
@@ -112,9 +121,10 @@ var SelfieView = Backbone.View.extend({
 
 var SelfieListView = Backbone.View.extend({
 	initialize: function(){
-		this.listenTo(this.collection, 'add', this.renderSelfie)
+		this.listenTo(this.collection, 'sync', this.renderSelfie)
 	},
 	renderSelfie: function(instance_of_selfie){
+		debugger
 		instance_of_selfie.view = new SelfieView({model: instance_of_selfie})
 		this.$el.prepend( instance_of_selfie.view.render().el)
 		return this;
@@ -124,6 +134,7 @@ var SelfieListView = Backbone.View.extend({
 // ** Document Ready ** 
 $(function(){
 var selfies_collection = new SelfieCollection();
+window.collection = selfies_collection
 var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
 var selfie_form_view = new SelfieFormView({collection: selfies_collection,
  el: $('#selfie-form')})
