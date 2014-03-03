@@ -59,7 +59,6 @@ var SelfieView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.model, 'remove', this.remove);
 		this.listenTo(this.model, 'change', this.render);
-
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
@@ -71,9 +70,10 @@ var SelfieView = Backbone.View.extend({
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
-	var rot = Math.random()*30-15+'deg';
-  var left = Math.random()*50+'px';
-  var top = Math.random()*150+'px';
+		var rot = Math.random()*30-15+'deg';
+  		var left = Math.random()*50+'px';
+		var top = Math.random()*150+'px';
+
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		this.$el
 		.css('-webkit-transform' , 'rotate('+rot+')')
@@ -92,14 +92,15 @@ var SelfieView = Backbone.View.extend({
  				$(this).css('z-index' , zindex);
  			})
  			.dblclick(function(){
-  			$(this).css('-webkit-transform' , 'rotate(0)');
-  			$(this).css('-moz-transform' , 'rotate(0)');
-}			);
+	  			$(this).css('-webkit-transform' , 'rotate(0)');
+	  			$(this).css('-moz-transform' , 'rotate(0)');
+			});
 		console.log(this);
 		console.log(this.model.get("json_analysis").url);
 		console.log(this.model.get("json_analysis").url);
 		return this
 	},
+
 	show: function(e) {
 		e.preventDefault();
 		this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
@@ -108,10 +109,9 @@ var SelfieView = Backbone.View.extend({
 		e.preventDefault();
 		this.model.destroy();
 	}
-
-// ** List View **
 });
 
+// ** List View **
 var SelfieListView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.collection, 'add', this.renderSelfie)
@@ -125,10 +125,9 @@ var SelfieListView = Backbone.View.extend({
 
 // ** Document Ready ** 
 $(function(){
-var selfies_collection = new SelfieCollection();
-var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
-var selfie_form_view = new SelfieFormView({collection: selfies_collection,
- el: $('#selfie-form')})
+	var selfies_collection = new SelfieCollection();
+	var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
+	var selfie_form_view = new SelfieFormView({collection: selfies_collection, el: $('#selfie-form')})
 });
 
 

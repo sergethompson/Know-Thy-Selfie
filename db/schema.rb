@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303030351) do
+ActiveRecord::Schema.define(version: 20140303184240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,22 @@ ActiveRecord::Schema.define(version: 20140303030351) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "caption"
+    t.float    "age"
+    t.string   "race_string"
+    t.float    "race_conf"
+    t.float    "confused"
+    t.float    "calm"
+    t.float    "angry"
+    t.float    "happy"
+    t.float    "sad"
+    t.float    "roll"
+    t.float    "pitch"
+    t.float    "yaw"
+    t.float    "smile"
+    t.float    "sex"
+    t.float    "surprised"
+    t.float    "eye_closed"
+    t.float    "glasses"
   end
 
   create_table "users", force: true do |t|

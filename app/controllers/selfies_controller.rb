@@ -1,7 +1,6 @@
 IMAGE_ANALYSIS = true
 #REKOGNIZE_JOBS = "face_detect_gender_race_emotion_face_recognize"
 REKOGNIZE_JOBS = "face_age_eye_closed_gender_race_emotion_face_recognize"
-#REKOGNIZE_JOBS = "face_recognize"
 
 class SelfiesController < ApplicationController
 
@@ -17,6 +16,7 @@ class SelfiesController < ApplicationController
 
 	def create
 		# Instead of using CarrierWave's temporary files, we're using our own
+
 		chart1 = selfie_params["photobooth_image_data"].split(',')
 		image = Base64.decode64(chart1[1])
 
@@ -45,15 +45,18 @@ class SelfiesController < ApplicationController
 
 		#Transform the hash into a JSON object for storage
 		new_selfie.json_analysis = JSON.generate(ret_val)
-# binding.pry
-		new_selfie.show_url = ret_val["url"]
 
+		# this technique of setting the show_url from the ret_val sseems to work, but if the Rekognize doesn't work, we have no idea where our image went, so we'll keep this as show_url
+		#	new_selfie.show_url = ret_val["url"]
 
-#		new_selfie.caption = create_caption_from_json_analysis(new_selfie.json_analysis) 
-#binding.pry
+		# The reason we need this data member is because we cannot access 'new_selfie.image_url.url' in JavaScript
+		new_selfie.show_url = new_selfie.image_url.url
 
+		#		new_selfie.caption = create_caption_from_json_analysis(new_selfie.json_analysis) 
+		#binding.pry
 
 		new_selfie.caption = create_caption_from_json_analysis(ret_val) 
+		set_confidence_values(new_selfie, ret_val)
 
 		new_selfie.votes = 0
 	    new_selfie.latitude = 40.7403775 #TODO: grab from Photo if available
@@ -81,18 +84,74 @@ class SelfiesController < ApplicationController
 		end
 	end
 
+	# The image analysis returns a Ruby Hash with lots of values.  They are typically things like "Smile" and "confidence" (ie, 95% confidence the person is smiling).  It is NOT saying "This person is smiling 95% of their ability to smile".
+	def set_confidence_values(in_selfie, ret_val)
+		#ERROR
+		if (ret_val.has_key?("face_detection") == false)
+			#We have a problem houston!  No face detection happened!
+			return "No face detection key: No confidence values to set! #{__FILE__} : #{__LINE__}"
+		end
+
+		if (ret_val["face_detection"].length < 1)
+			#We have a problem...  There WAS a face detected but there's no pose
+			return "face_detection array is length 0.  Unable to set confidence values. #{__FILE__} : #{__LINE__}"
+		end
+
+		if (ret_val["face_detection"].length > 1)
+			#We have a problem...  There WAS a face detected but there's no pose
+			return "face_detection array is length: #{in_selfie["face_detection"].length}.  But we're only setting confidence values for [0] #{__FILE__} : #{__LINE__}"
+		end
+
+		face = ret_val["face_detection"][0]
+
+		in_selfie.age 			= face["age"]
+		in_selfie.race_string 	= face["race"].keys[0]
+		in_selfie.race_conf 	= face["race"][in_selfie.race_string]
+
+		if (face["emotion"].has_key?("confused")) 
+			in_selfie.confused	= face["emotion"]["confused"]
+		end
+		if (face["emotion"].has_key?("calm")) 	  
+			in_selfie.confused	= face["emotion"]["calm"]
+		end
+		if (face["emotion"].has_key?("angry") )	  
+			in_selfie.angry		= face["emotion"]["angry"]
+		end
+		if (face["emotion"].has_key?("happy") )	  
+			in_selfie.angry		= face["emotion"]["happy"]
+		end
+		if (face["emotion"].has_key?("sad") )	  
+			in_selfie.angry		= face["emotion"]["sad"]
+		end
+		if (face["emotion"].has_key?("surprised") )	  
+			in_selfie.angry		= face["emotion"]["surprised"]
+		end
+
+		in_selfie.roll 		= face["pose"]["roll"]
+		in_selfie.yaw  		= face["pose"]["yaw"]
+		in_selfie.pitch 	= face["pose"]["pitch"]
+
+		in_selfie.smile 	= face["smile"]
+		in_selfie.glasses 	= face["glasses"]
+		in_selfie.eye_closed 	= face["eye_closed"]
+		in_selfie.sex		= face["sex"]
+
+	end
+
+
+
 
 	def create_caption_from_json_analysis(json_analysis) 
 		ret_string = ""
 		#ERROR
 		if (json_analysis.has_key?("face_detection") == false)
 			#We have a problem houston!  No face detection happened!
-			return "Did not recognize a face #{__FILE__}:{__LINE__}"
+			return "Did not recognize a face #{__FILE__} : #{__LINE__}"
 		end
 
 		if (json_analysis["face_detection"].length < 1)
 			#We have a problem...  There WAS a face detected but there's no pose
-			return "Did not recognize a face #{__FILE__}:{__LINE__}"
+			return "Did not recognize a face #{__FILE__} : #{__LINE__}"
 		end
 
 		face = json_analysis["face_detection"][0]
@@ -155,7 +214,7 @@ class SelfiesController < ApplicationController
 
 
 
-	private
+private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_selfie
@@ -167,4 +226,5 @@ class SelfiesController < ApplicationController
     def selfie_params
     	params.require(:selfy).permit(:caption, :show_url, :image_url, :json_analysis, :votes, :latitude, :longitude, :user_id, :photobooth_image_data)
     end
-  end
+
+end
