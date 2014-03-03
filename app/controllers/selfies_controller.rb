@@ -1,7 +1,6 @@
 IMAGE_ANALYSIS = true
 #REKOGNIZE_JOBS = "face_detect_gender_race_emotion_face_recognize"
 REKOGNIZE_JOBS = "face_age_eye_closed_gender_race_emotion_face_recognize"
-#REKOGNIZE_JOBS = "face_recognize"
 
 class SelfiesController < ApplicationController
 
@@ -17,9 +16,6 @@ class SelfiesController < ApplicationController
 
 	def create
 		# Instead of using CarrierWave's temporary files, we're using our own
-
-puts "BLAH BLAH BLAH #{__FILE__} : #{__LINE__}"
-
 
 		chart1 = selfie_params["photobooth_image_data"].split(',')
 		image = Base64.decode64(chart1[1])
@@ -49,13 +45,15 @@ puts "BLAH BLAH BLAH #{__FILE__} : #{__LINE__}"
 
 		#Transform the hash into a JSON object for storage
 		new_selfie.json_analysis = JSON.generate(ret_val)
-#binding.pry
-		new_selfie.show_url = ret_val["url"]
 
+		# this technique of setting the show_url from the ret_val sseems to work, but if the Rekognize doesn't work, we have no idea where our image went, so we'll keep this as show_url
+		#	new_selfie.show_url = ret_val["url"]
 
-#		new_selfie.caption = create_caption_from_json_analysis(new_selfie.json_analysis) 
-#binding.pry
+		# The reason we need this data member is because we cannot access 'new_selfie.image_url.url' in JavaScript
+		new_selfie.show_url = new_selfie.image_url.url
 
+		#		new_selfie.caption = create_caption_from_json_analysis(new_selfie.json_analysis) 
+		#binding.pry
 
 		new_selfie.caption = create_caption_from_json_analysis(ret_val) 
 		set_confidence_values(new_selfie, ret_val)
@@ -216,7 +214,7 @@ puts "BLAH BLAH BLAH #{__FILE__} : #{__LINE__}"
 
 
 
-	private
+private
 
     # Use callbacks to share common setup or constraints between actions.
     def set_selfie
@@ -228,4 +226,5 @@ puts "BLAH BLAH BLAH #{__FILE__} : #{__LINE__}"
     def selfie_params
     	params.require(:selfy).permit(:caption, :show_url, :image_url, :json_analysis, :votes, :latitude, :longitude, :user_id, :photobooth_image_data)
     end
-  end
+
+end
