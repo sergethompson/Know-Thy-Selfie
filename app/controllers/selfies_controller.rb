@@ -17,6 +17,10 @@ class SelfiesController < ApplicationController
 
 	def create
 		# Instead of using CarrierWave's temporary files, we're using our own
+
+puts "BLAH BLAH BLAH #{__FILE__} : #{__LINE__}"
+
+
 		chart1 = selfie_params["photobooth_image_data"].split(',')
 		image = Base64.decode64(chart1[1])
 
@@ -53,6 +57,7 @@ class SelfiesController < ApplicationController
 
 
 		new_selfie.caption = create_caption_from_json_analysis(ret_val) 
+		set_confidence_values(new_selfie, ret_val)
 
 		new_selfie.votes = 0
 	    new_selfie.latitude = 40.7403775 #TODO: grab from Photo if available
@@ -64,7 +69,7 @@ class SelfiesController < ApplicationController
 
 		respond_to do |format|
 			format.html {}
-			format.json { render json: @new_selfie}
+			format.json { render json: new_selfie}
 		end
 
 
@@ -80,18 +85,93 @@ class SelfiesController < ApplicationController
 		end
 	end
 
+	# The image analysis returns a Ruby Hash with lots of values.  They are typically things like "Smile" and "confidence" (ie, 95% confidence the person is smiling).  It is NOT saying "This person is smiling 95% of their ability to smile".
+	def set_confidence_values(in_selfie, ret_val)
+		return
+		#ERROR
+		if (json_analysis.has_key?("face_detection") == false)
+			#We have a problem houston!  No face detection happened!
+			return "No face recognized: No confidence values to set! #{__FILE__} : #{__LINE__}"
+		end
+
+		if (json_analysis["face_detection"].length < 1)
+			#We have a problem...  There WAS a face detected but there's no pose
+			return "Did not recognize a face #{__FILE__} : #{__LINE__}"
+		end
+
+		face = json_analysis["face_detection"][0]
+
+		if (face["age"] > 26)
+			ret_string = "New York selfies average a bit older"
+		elsif (face["age"] < 23.3)
+			ret_string = "The selfies in Sao Paulo tend to skew very young"
+		end
+
+		if (face["pose"]["roll"].abs > 8) #Head tilted to the side
+			ret_string = "Nice tilt!  Are you from Sao Paulo?"
+		elsif (face["pose"]["pitch"] > 8) #Looking DOWN
+			ret_string = "Is it raining?"
+		elsif (face["pose"]["pitch"] < -8) #Looking UP
+			ret_string = "Japanese selfies tend to look down"
+		end
+
+
+		if (face["emotion"].has_key?("happy"))		
+			if (face["emotion"]["happy"] > 50)
+				ret_string = "Bangkok has the most smiles" #Like you, few Moscovites smile in their Selfies
+			end
+		end
+
+		if (face["emotion"].has_key?("confused"))
+			if (face["emotion"]["confused"] > 50)
+				ret_string = "Do you have any questions?"
+			end
+		end
+
+		if (face["emotion"].has_key?("sad"))
+			if (face["emotion"]["sad"] > 50)  
+				ret_string = "Let’s talk about it :-("
+			end
+		end
+
+		if (face["emotion"].has_key?("angry"))
+			if (face["emotion"]["angry"] > 50)  
+				ret_string = "So this guy walks into a bar.  Ouch!"
+			end
+		end
+
+		if (face["smile"] > 81)
+			ret_string = "Nice smile!  Bangkok has the most smiles"
+		end
+
+
+		if (ret_string.length == 0)
+			if (face["sex"].abs < 20)
+				ret_string = "Foxy lady!"
+			elsif (face["sex"].abs > 80)
+				ret_string = "Hey Dude!"
+			else
+				ret_string = "Sorry, facial recognition failed to report anything interesting about this photo"
+			end
+		end
+		return ret_string		
+
+	end
+
+
+
 
 	def create_caption_from_json_analysis(json_analysis) 
 		ret_string = ""
 		#ERROR
 		if (json_analysis.has_key?("face_detection") == false)
 			#We have a problem houston!  No face detection happened!
-			return "Did not recognize a face #{__FILE__}:{__LINE__}"
+			return "Did not recognize a face #{__FILE__} : #{__LINE__}"
 		end
 
 		if (json_analysis["face_detection"].length < 1)
 			#We have a problem...  There WAS a face detected but there's no pose
-			return "Did not recognize a face #{__FILE__}:{__LINE__}"
+			return "Did not recognize a face #{__FILE__} : #{__LINE__}"
 		end
 
 		face = json_analysis["face_detection"][0]
