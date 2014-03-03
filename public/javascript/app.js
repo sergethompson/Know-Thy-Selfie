@@ -63,7 +63,7 @@ var SelfieFormView = Backbone.View.extend({
 var SelfieView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.model, 'remove', this.remove)
-		this.listenTo(this.model, 'change', this.change_event)
+		this.listenTo(this.model, 'change', this.render)
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
@@ -87,17 +87,6 @@ var SelfieView = Backbone.View.extend({
 		e.preventDefault();
 		this.model.destroy();
 	}
-
-	,
-	change_event: function(){
-console.log("BLBJKJKJBKJKJKBJ");
-return this.render();
-
-}
-
-
-
-
 });
 
 var SelfieListView = Backbone.View.extend({
@@ -115,10 +104,9 @@ var SelfieListView = Backbone.View.extend({
 
 
 $(function(){
-var selfies_collection = new SelfieCollection();
-var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
-var selfie_form_view = new SelfieFormView({collection: selfies_collection,
- el: $('#selfie-form')})
+	var selfies_collection = new SelfieCollection();
+	var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
+	var selfie_form_view = new SelfieFormView({collection: selfies_collection, el: $('#selfie-form')})
 });
 
 
