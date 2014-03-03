@@ -17,7 +17,7 @@ h1,h2,h3, h2 a, h3 a{
 }
 
 #wrapper{
-	width: 470px;
+	width: 80%px;
 	margin: 10px auto 30px;
 	position: relative;
 }
@@ -50,7 +50,9 @@ h3, h3 a{
 }
 
 #example{
-	height: 300px;
+	display: block;
+	z-index: 2;
+ 	width: 100%;
 }
 
 
@@ -89,6 +91,14 @@ h3, h3 a{
 #gallery{
 	margin: 5px 0;
 	background: #f6f6f6;
+	box-shadow: 0px 6px 20px #000;
+  -moz-box-shadow: 0px 6px 20px #000;
+  -webkit-box-shadow: 0px 6px 20px #000;
+  position: absolute;
+  left: 181px;
+  top: 45px;
+  width: 250px;
+  z-index: 2;
 }
 
 .downloadButton{
@@ -205,7 +215,7 @@ h3, h3 a{
 }
 .tab_container .tabs li.selected{
 	border-bottom-color: #fff;
-	
+
 	background: #f6f6f6;
 	color: #000;
 }

@@ -1,3 +1,31 @@
+input.trigger{
+    position: absolute;
+    width: 43px;
+    z-index: 6;
+    top: 210px;
+    left: 381px;
+    background: #2f2f2f;
+    text-align: center;
+    display: block;
+    border-radius:8px;
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+    box-shadow: 0px 3px 5px #000;
+    -moz-box-shadow: 0px 3px 5px #000;
+    -webkit-box-shadow: 0px 3px 5px #000;
+    outline: none;
+}
+input.trigger:active {
+      position: absolute;
+      width: 43px;
+      z-index: 6;
+      top: 210px;
+      left:381px;
+      color: #fqq;
+      box-shadow: none;
+     -moz-box-shadow: none;
+     -webkit-box-shadow: none;
+ }
 
 .photobooth{
 	position: relative;
@@ -202,7 +230,7 @@ noindex:-o-prefocus,.resizehandle{
 */
 @-moz-document url-prefix(){
 	.resizehandle{
-		box-shadow: none !important; 
+		box-shadow: none !important;
 	}
 }
 .resizehandle .handle{

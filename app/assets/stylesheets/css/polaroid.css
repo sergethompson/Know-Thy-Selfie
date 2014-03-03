@@ -1,0 +1,39 @@
+#flash{
+    content: " ";
+    display: table;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width:100%;
+    height: 100%;
+    z-index: 5;
+}
+#upper-polaroid{
+    position: absolute;
+    z-index: 4;
+    width: 80%;
+}
+#pic-fade{
+    position: absolute;
+    width: 215px;
+    height: 220px;
+    left: 200px;
+    top: 65px;
+    background: #381e18;
+    z-index: 3;
+}
+/*#snoop{
+    box-shadow: 0px 6px 20px #000;
+    -moz-box-shadow: 0px 6px 20px #000;
+    -webkit-box-shadow: 0px 6px 20px #000;
+    position: absolute;
+    left: 181px;
+    top: 45px;
+    width: 250px;
+    z-index: 2;
+}*/
+#camera{
+    position: absolute;
+    width: 80%;
+    z-index: 1;
+}
