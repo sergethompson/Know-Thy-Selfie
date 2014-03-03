@@ -45,7 +45,7 @@ class SelfiesController < ApplicationController
 
 		#Transform the hash into a JSON object for storage
 		new_selfie.json_analysis = JSON.generate(ret_val)
-binding.pry
+# binding.pry
 		new_selfie.show_url = ret_val["url"]
 
 
