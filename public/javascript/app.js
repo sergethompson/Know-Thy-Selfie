@@ -63,6 +63,7 @@ var SelfieFormView = Backbone.View.extend({
 var SelfieView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.model, 'remove', this.remove)
+		this.listenTo(this.model, 'change', this.change_event)
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
@@ -77,6 +78,7 @@ var SelfieView = Backbone.View.extend({
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		return this
 	},
+
 	show: function(e) {
 		e.preventDefault();
 		this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
@@ -85,6 +87,15 @@ var SelfieView = Backbone.View.extend({
 		e.preventDefault();
 		this.model.destroy();
 	}
+
+	,
+	change_event: function(){
+console.log("BLBJKJKJBKJKJKBJ");
+return this.render();
+
+}
+
+
 
 
 });
