@@ -1,4 +1,5 @@
-var dino_data = [{"name":"ACROCANTHOSAURUS","weight":4000}]
+var dino_data = [{"name":"ACROCANTHOSAURUS","weight":4000}];
+var organized = 0
 
 // Sets zindex outside functions to be used later unrestricted
 var zindex = 1;
@@ -92,7 +93,9 @@ var SelfieView = Backbone.View.extend({
 		var top = Math.random()*150+'px';
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
-		this.$el
+		if (organized === 0)
+  {
+  this.$el
 		.css('-webkit-transform' , 'rotate('+rot+')')
 			.css('-moz-transform' , 'rotate('+rot+')')
 			.css('top' , left)
@@ -115,6 +118,7 @@ var SelfieView = Backbone.View.extend({
 		console.log(this);
 		console.log(this.model.get("json_analysis").url);
 		console.log(this.model.get("json_analysis").url);
+  }
 		return this
 	},
 
