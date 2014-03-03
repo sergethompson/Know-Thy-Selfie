@@ -1,3 +1,4 @@
+var dino_data = [{"name":"ACROCANTHOSAURUS","weight":4000}]
 
 // Sets zindex outside functions to be used later unrestricted
 var zindex = 1;
@@ -24,7 +25,23 @@ var Selfie = Backbone.Model.extend({
 		latitude: 0,
 		longitude: 0,
 		user_id: 0,
-		photobooth_image_data: ""
+		photobooth_image_data: "",
+		age: 0,
+		race_string: "",
+		race_conf: 0,
+		confused: 0,
+		calm: 0,
+		angry: 0,
+		happy: 0,
+		sad: 0,
+		roll: 0,
+		pitch: 0,
+		yaw: 0,
+		smile: 0,
+		sex: 0,
+		surprised: 0,
+		eye_closed: 0,
+		glasses: 0
 	}
 });
 // ** Collection **
