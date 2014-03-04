@@ -7,16 +7,24 @@
 	<title>Know Thy Selfie</title>
 	</head>
 	<body>
+
+
+
+
+	<!-- slideout polaroid -->
 	<div id="slideout">
-	  	<h4 id='tab'>Camera</h4>
-	  	<div id="slideout_inner">
-		<div id="wrapper">
-			<div id="example"></div>
-			<div id="gallery"></div>
-		</div>
-		<form id="selfie-form">
+  	<h4 id='tab'>Camera</h4>
+	  <div id="slideout_inner">
+			<!-- <div id="flash"></div> -->
+			<div id="wrapper">
+				<div id="gallery"></div>
+			</div>
+			<!-- <div id="pic-fade"></div> -->
+			<img id="camera" src='/assets/base_camera.png'>
+			<div style="z-index:4;" id="example"></div>
+			<form id="selfie-form">
 			<div class="centered">
-				<button class="btn btn-large btn-warning center" type="submit">Click to Submit Selfie!!!</button>
+				<button id="selfie-submit" class="btn btn-large btn-warning center" type="submit">Click to Submit Selfie!!!</button>
 			</div>
 		</form>
 	  </div>
@@ -60,17 +68,12 @@
 </body>
 </html>
 
-
-<!-- slideout polaroid -->
-<div id="slideout">
-  	<h4 id='tab'>Camera</h4>
-	  <div id="slideout_inner">
-			<!-- <div id="flash"></div> -->
-			<div id="wrapper">
-				<div id="gallery"></div>
-			</div>
-			<!-- <div id="pic-fade"></div> -->
-			<img id="camera" src='/assets/base_camera.png'>
-			<div style="z-index:4;" id="example"></div>
-	  </div>
-	</div>
+<!-- <div id="slideout">
+	  	<h4 id='tab'>Camera</h4>
+	  	<div id="slideout_inner">
+		<div id="wrapper">
+			<div id="example"></div>
+			<div id="gallery"></div>
+		</div>
+		</div>
+	</div> -->

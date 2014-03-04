@@ -15,10 +15,10 @@
 
 
 body{
- 	/*background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");*/
+ 	background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");
 
 
- 	background-image: url("/assets/wood_00326565.jpg");
+ 	/*background-image: url("/assets/wood_00326565.jpg");*/
 
  }
 
@@ -60,6 +60,17 @@ h2
      margin:25px 0 0 15px;
  }
 
+#selfie-form{
+	padding-top: 571px;
+	margin: 0 auto;
+}
+
+#selfie-submit{
+	/*position: absolute;
+	z-index: 2;*/
+	width: 1000px;
+}
+
 #selfie-list {
  	height: 100%;
  	width: 90%;
@@ -85,19 +96,19 @@ h2
 				width: 465px;
   position: fixed;
   top: -10px;
-  left: -465px;
+  /*left: -465px;*/
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
 
-#slideout:hover {
+/*#slideout:hover {
   left:465px;
 }
 #slideout:hover #slideout_inner {
   left: 0;
-}
+}*/
 h4#tab{
 border-bottom-left-radius: 2em;
 border-bottom-right-radius: 2em ;
