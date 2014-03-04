@@ -15,12 +15,15 @@
 
 
 body{
- 	background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");
+	background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");
 
    	/*background-image: url("/assets/wood_00326565.jpg");*/
 
  }
 
+#stats-view div{
+	width: 0px;
+}
 .caption_text{
 	font-family: 'Permanent Marker', cursive;
 }

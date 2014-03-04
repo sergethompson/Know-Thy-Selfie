@@ -37,11 +37,10 @@
 	<script id="selfieview-template" type='text/template'>
 		<div class="col-md-3">
 			<div class="selfie">
-				<img class="selfie-image" id="show" src="<%%= show_url %>">
+				<img id="show" class="selfie-image" src="<%%= show_url %>">
 				<div class="caption">
 					<h2 class="caption_text"><%%= caption %></h2>
 					<div id="stats-view"></div>
-					<button id="show">Show Votes</button>
 					<button data-action="destroy">Delete</button>
 				</div>
 			</div>
@@ -55,7 +54,6 @@
 				<%%= glasses %>
 			</h3>
 		</div>
-		<section id='dino-field'></section>
 	</script>
 
 
