@@ -6,12 +6,12 @@ var projectionIndex = 1;
 var zindex = 1;
 // Fix security concerns with rails
 Backbone.sync = (function(original) {
-  return function(method, model, options) {
-    options.beforeSend = function(xhr) {
-      xhr.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
-    };
-    original(method, model, options);
-  };
+	return function(method, model, options) {
+		options.beforeSend = function(xhr) {
+			xhr.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+		};
+		original(method, model, options);
+	};
 })(Backbone.sync);
 
 // ** Model **  
@@ -80,7 +80,7 @@ var SelfieView = Backbone.View.extend({
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
-		//'click [id="show"]' : 'show',
+		'click [id="show"]' : 'show'
 		//'click [id="stats"]' : 'stats'
 	},
 	tagName: 'div',
@@ -90,12 +90,12 @@ var SelfieView = Backbone.View.extend({
 
 	render: function(){
 		var rot = Math.random()*30-15+'deg';
-  	var left = Math.random()*50+'px';
+		var left = Math.random()*50+'px';
 		var top = Math.random()*300+'px';
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		if (organized === 0)
-  {
+		{
 
 
 
@@ -109,19 +109,19 @@ var SelfieView = Backbone.View.extend({
   	//console.log(this.model.get("age"))
 
   		///////////// ***************** d3 start ???
-			var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([{"age":this.model.get("age"),"weight":4000}]);
+  		// var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([{"age":this.model.get("age"),"weight":4000}]);
 
-			projection.enter()
-		.append('div')
-				.style("background-color", "blue")			
-			.transition()
-				.duration(3000)
-	.text(function(d){
-		return d.age
-	})
-		.style('width' , function(d){return d.age + 'px';} )
-		.transition()
-				.duration(3000);
+  		// projection.enter()
+  		// .append('div')
+  		// .style("background-color", "blue")			
+  		// .transition()
+  		// .duration(3000)
+  		// .text(function(d){
+  		// 	return d.age
+  		// })
+  		// .style('width' , function(d){return d.age + 'px';} )
+  		// .transition()
+  		// .duration(3000);
 			//****************
   	/////////////////////////////////////////////
 
@@ -135,34 +135,48 @@ var SelfieView = Backbone.View.extend({
 
 
 
-  this.$el
-		.css('-webkit-transform' , 'rotate('+rot+')')
-	  .css('-moz-transform' , 'rotate('+rot+')')
-			.css('top' , left)
-			.css('left' , top)
-			.draggable({
-  			start: function(event, ui) {
-   			zindex++;
-   			var cssObj = { 'z-index' : zindex };
-   			$(this).css(cssObj);
-  			}
- 			})
- 			.mouseup(function(){
- 				zindex++;
- 				$(this).css('z-index' , zindex);
- 			})
- 			.dblclick(function(){
-	  			$(this).css('-webkit-transform' , 'rotate(0)');
-	  			$(this).css('-moz-transform' , 'rotate(0)');
-			});
+  	this.$el
+  	.css('-webkit-transform' , 'rotate('+rot+')')
+  	.css('-moz-transform' , 'rotate('+rot+')')
+  	.css('top' , left)
+  	.css('left' , top)
+  	.draggable({
+  		start: function(event, ui) {
+  			zindex++;
+  			var cssObj = { 'z-index' : zindex };
+  			$(this).css(cssObj);
+  		}
+  	})
+  	.mouseup(function(){
+  		zindex++;
+  		$(this).css('z-index' , zindex);
+  	})
+  	.dblclick(function(){
+  		$(this).css('-webkit-transform' , 'rotate(0)');
+  		$(this).css('-moz-transform' , 'rotate(0)');
+  	});
 
   }
-		return this
-	},
+  return this
+},
 
-	show: function(e) {
-		e.preventDefault();
-		this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
+show: function(e) {
+	e.preventDefault();
+		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
+		var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([{"age":this.model.get("age"),"weight":4000}]);
+
+		projection.enter()
+		.append('div')
+		.style("background-color", "blue")
+		.style("height", "200px")			
+		// .transition()
+		// .duration(3000)
+		.text(function(d){
+			return d.age
+		})
+		.style('width' , function(d){return d.age/5 + 'px';} )
+		// .transition()
+		// .duration(3000);
 	},
 	destroy: function(e){
 		e.preventDefault();
@@ -179,7 +193,7 @@ var SelfieStatView = Backbone.View.extend({
 
 	renderStats: function(){
 
-	
+
 
 	}
 
