@@ -18,7 +18,7 @@ var Selfie = Backbone.Model.extend({
 
 	defaults: {
 		show_url: "https://pbs.twimg.com/profile_images/378800000553651991/ac5d33362645c4f415a7933d3c296d70.jpeg",
-		caption: "Mysteriously empty caption",
+		caption: "",
 		image_url: "",
 		json_analysis: "",
 		votes: 0,
@@ -47,6 +47,32 @@ var Selfie = Backbone.Model.extend({
 		top: -1
 	}
 });
+
+// Normalize sex values so that when we have a "male", we can show a "100% confidence" in the subject being male, and a 100% confidence when a subject is female
+// 1.0 = 100% confidence in male
+// 0.0 = 100% confidence in female
+var getNormalizedConfidenceOfSex = function(inModel) {
+	var confidence = inModel.get("sex");
+	if (confidence > 0.50){
+		return confidence * 2; // It's a boy!
+	}
+	else{
+		return (1-(2*confidence);
+	}
+}
+
+// Normalize sex string.  If greater than 50%
+var getSexString = function(inModel) {
+	var confidence = inModel.get("sex");
+	if (confidence > 0.50){
+		return "Male"; // It's a boy!
+	}
+	else{
+		return "Female"; // It's a girl!
+	}
+}
+
+
 // ** Collection **
 var SelfieCollection = Backbone.Collection.extend({
 	url: '/selfies',
@@ -81,7 +107,8 @@ var SelfieView = Backbone.View.extend({
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
-		'click [id="show"]' : 'show'
+		'click [id="show"]' : 'show',
+		'click [id="stats-slide"]' : 'showSlide'
 		//'click [id="stats"]' : 'stats'
 	},
 	tagName: 'div',
@@ -163,18 +190,77 @@ var SelfieView = Backbone.View.extend({
 		projection.enter()
 		.append('div')
 		.style("background-color", "black")
-		.style("height", "1.5em")
+		.style("height", "2em")
 		.style("float", "left")
-		.style("margin", ".3em")
+		.style("margin", ".25em")
 		.transition()
 		.duration(3000)
 		// .text(function(d){
 		// 	return d.name
 		// })
-		.style('width' , function(d){return d.value*5 + .5 + 'px';} )
+		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
 		.transition()
 		.duration(3000);
 	},
+
+
+		showSlide: function(e) {
+		e.preventDefault();
+		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
+		var slideData = 
+		[
+			{"value":this.model.get("sex"),"name":"sex"}, 
+			{"value":this.model.get("confused"),"name":"confused"},
+			{"value":this.model.get("angry"),"name":"angry"},
+			{"value":this.model.get("glasses"),"name":"glasses"},
+			{"value":this.model.get("happy"),"name":"happy"},
+			{"value":this.model.get("sad"),"name":"sad"},
+			{"value":this.model.get("calm"),"name":"calm"},
+			{"value":this.model.get("race_conf"),"name":this.model.get("race_string")},
+			{"value":Math.abs(this.model.get("roll")/90),"name":"roll"},
+			{"value":Math.abs(this.model.get("pitch")/90),"name":"pitch"},
+			{"value":Math.abs(this.model.get("yaw")/90),"name":"yaw"},
+			{"value":this.model.get("smile"),"name":"smile"},
+			{"value":this.model.get("surprised"),"name":"surprised"},
+			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
+			{"value":this.model.get("glasses"),"name":"glasses"}
+			];
+		$('#colright-d3').empty();
+		var projectionSlide = d3.select('#colright-d3').selectAll('div').data(slideData);
+		projectionSlide.enter()
+		.append('div')
+		.style("background-color", "yellow")
+		.style("height", "2em")
+		.style("float", "left")
+		.style("margin", ".25em")
+		.transition()
+		.duration(3000)
+		// .text(function(d){
+		// 	return d.name
+		// })
+		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
+		.transition()
+		.duration(3000);
+
+		/////********** this is li row data of barcode
+			$('#slide-li-d3').empty();
+		var projectionSlide = d3.select('#slide-li-d3').selectAll('li').data(slideData);
+		projectionSlide.enter()
+		.append('li')
+		.style("background-color", "yellow")
+		.style("height", "2em")
+		// .style("float", "left")
+		// .style("margin", ".25em")
+		.transition()
+		.duration(3000)
+		.text(function(d){
+			return d.name
+		})
+		.style('width' , function(d){return d.value*150 + 2 + 'px';} )
+		.transition()
+		.duration(3000);
+	},
+
 	
 	destroy: function(e){
 		e.preventDefault();
