@@ -50,6 +50,7 @@ class SelfiesController < ApplicationController
 
 		#Transform the hash into a JSON object for storage
 		new_selfie.json_analysis = JSON.generate(ret_val)
+#binding.pry
 
 		# The reason we need this data member is because we cannot access 'new_selfie.image_url.url' in JavaScript
 		new_selfie.show_url = new_selfie.image_url.url
@@ -91,7 +92,7 @@ private
     # Never trust parameters from the scary internet, only allow the white list through.
 
     def selfie_params
-    	params.require(:selfy).permit(:caption, :show_url, :image_url, :json_analysis, :votes, :latitude, :longitude, :user_id, :photobooth_image_data)
+    	params.require(:selfy).permit(:caption, :show_url, :image_url, :json_analysis, :votes, :latitude, :longitude, :user_id, :age, :race_string, :race_conf, :confused, :calm, :angry, :happy, :sad, :roll, :pitch, :yaw, :smile, :sex, :surprised, :eye_closed, :glasses, :photobooth_image_data)
     end
 
 end

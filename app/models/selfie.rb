@@ -3,7 +3,7 @@ class Selfie < ActiveRecord::Base
 
 	# Creates the caption based on the JSON analysis from the image analysis program
 	def self.create_caption(json_analysis) 
-		ret_string = ""
+		ret_string_ar = []
 		#ERROR
 		if (json_analysis.has_key?("face_detection") == false)
 			#We have a problem houston!  No face detection happened!
@@ -14,62 +14,73 @@ class Selfie < ActiveRecord::Base
 			#We have a problem...  There WAS a face detected but there's no pose
 			return "Did not recognize a face #{__FILE__} : #{__LINE__}"
 		end
-
 		face = json_analysis["face_detection"][0]
 
 		if (face["age"] > 26)
-			ret_string = "New York selfies average a bit older"
+			ret_string_ar.push("New York selfies average a bit older")
 		elsif (face["age"] < 23.3)
-			ret_string = "The selfies in Sao Paulo tend to skew very young"
+			ret_string_ar.push("The selfies in Sao Paulo tend to skew very young")
 		end
 
 		if (face["pose"]["roll"].abs > 8) #Head tilted to the side
-			ret_string = "Nice tilt!  Are you from Sao Paulo?"
+			ret_string_ar.push("Nice tilt!  Are you from Sao Paulo?")
 		elsif (face["pose"]["pitch"] > 8) #Looking DOWN
-			ret_string = "Is it raining?"
+			ret_string_ar.push("Is it raining?")
 		elsif (face["pose"]["pitch"] < -8) #Looking UP
-			ret_string = "Japanese selfies tend to look down"
+			ret_string_ar.push("Japanese selfies tend to look down")
 		end
 
 		if (face["emotion"].has_key?("happy"))		
-			if (face["emotion"]["happy"] > 50)
-				ret_string = "Bangkok has the most smiles" #Like you, few Moscovites smile in their Selfies
+			if (face["emotion"]["happy"] > 0.50)
+				ret_string_ar.push("Bangkok has the most smiles") #Like you, few Moscovites smile in their Selfies
 			end
 		end
 
 		if (face["emotion"].has_key?("confused"))
-			if (face["emotion"]["confused"] > 50)
-				ret_string = "Do you have any questions?"
+			if (face["emotion"]["confused"] > 0.50)
+				ret_string_ar.push("Do you have any questions?")
 			end
 		end
 
 		if (face["emotion"].has_key?("sad"))
-			if (face["emotion"]["sad"] > 50)  
-				ret_string = "Let’s talk about it :-("
+			if (face["emotion"]["sad"] > 0.50)  
+				ret_string_ar.push("Let’s talk about it :-(")
 			end
 		end
 
 		if (face["emotion"].has_key?("angry"))
-			if (face["emotion"]["angry"] > 50)  
-				ret_string = "So this guy walks into a bar.  Ouch!"
+			if (face["emotion"]["angry"] > 0.50)  
+				ret_string_ar.push("So this guy walks into a bar.  Ouch!")
 			end
 		end
 
-		if (face["smile"] > 81)
-			ret_string = "Nice smile!  Bangkok has the most smiles"
+		if (face["smile"] > 0.81)
+			ret_string_ar.push("Nice smile!  Bangkok has the most smiles")
 		end
 
 
-		if (ret_string.length == 0)
-			if (face["sex"].abs < 20)
-				ret_string = "Foxy lady!"
-			elsif (face["sex"].abs > 80)
-				ret_string = "Hey Dude!"
-			else
-				ret_string = "Sorry, facial recognition failed to report anything interesting about this photo"
-			end
+		if (face["sex"].abs < 0.20)
+			ret_string_ar.push("Foxy lady!")
+		elsif (face["sex"].abs > 0.80)
+			ret_string_ar.push("Hey Dude!")
 		end
-		return ret_string		
+
+		if (face["glasses"] > 0.50)
+			ret_string_ar.push("Nice Glasses!")
+		end
+
+		if (face["smile"] > 0.50)
+			ret_string_ar.push("Nice smile!")
+		end
+
+		if (face["eye_closed"] > 0.50)
+			ret_string_ar.push("Am I boring you?")
+		end
+
+
+puts "Potential strings: #{ret_string_ar.to_s}"
+#binding.pry
+		return ret_string_ar.sample
 	end
 
 
