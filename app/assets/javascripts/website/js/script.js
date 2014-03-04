@@ -10,8 +10,8 @@ $(function(){
 		//     setTimeout(function() {
 		//     $('#flash').css('background-color','')
 		// }, 175);
-		$("#gallery").append('<div class="selfie"></div>')
-		$('.selfie').html( '<img src="' + dataUrl + '" >')
+		$("#gallery").append('<div id="new-selfie"></div>')
+		$('#new-selfie').html( '<img src="' + dataUrl + '" >')
 		$( "#gallery" ).show();
 		$("#gallery" ).animate({ top: "+=175px" }, 4000);
 		$( "#pic-fade" ).animate({ top: "+=175px" }, 4000);

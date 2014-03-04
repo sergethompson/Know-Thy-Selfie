@@ -13,7 +13,7 @@ Backbone.sync = (function(original) {
   };
 })(Backbone.sync);
 
-// ** Model **  
+// ** Model **
 
 var Selfie = Backbone.Model.extend({
 
@@ -151,7 +151,7 @@ var SelfieListView = Backbone.View.extend({
 	}
 })
 
-// ** Document Ready ** 
+// ** Document Ready **
 $(function(){
 	var selfies_collection = new SelfieCollection();
 	var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
