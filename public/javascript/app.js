@@ -89,15 +89,15 @@ var SelfieView = Backbone.View.extend({
 
 	render: function(){
 		var rot = Math.random()*30-15+'deg';
-  		var left = Math.random()*50+'px';
-		var top = Math.random()*150+'px';
+  	var left = Math.random()*50+'px';
+		var top = Math.random()*300+'px';
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		if (organized === 0)
   {
   this.$el
 		.css('-webkit-transform' , 'rotate('+rot+')')
-			.css('-moz-transform' , 'rotate('+rot+')')
+	  .css('-moz-transform' , 'rotate('+rot+')')
 			.css('top' , left)
 			.css('left' , top)
 			.draggable({
@@ -139,7 +139,7 @@ var SelfieListView = Backbone.View.extend({
 	},
 	renderSelfie: function(instance_of_selfie){
 		instance_of_selfie.view = new SelfieView({model: instance_of_selfie})
-		this.$el.prepend( instance_of_selfie.view.render().el)
+		this.$el.append( instance_of_selfie.view.render().el)
 		return this;
 	}
 })
