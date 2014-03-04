@@ -1,6 +1,4 @@
-var dino_data = [{"name":"ACROCANTHOSAURUS","weight":4000}];
 var organized = 0;
-var projectionIndex = 1;
 
 // Sets zindex outside functions to be used later unrestricted
 var zindex = 1;
@@ -14,7 +12,7 @@ Backbone.sync = (function(original) {
 	};
 })(Backbone.sync);
 
-// ** Model **  
+// ** Model **
 
 var Selfie = Backbone.Model.extend({
 
@@ -43,7 +41,10 @@ var Selfie = Backbone.Model.extend({
 		sex: 0,
 		surprised: 0,
 		eye_closed: 0,
-		glasses: 0
+		glasses: 0,
+		rot: -1,
+		left: -1,
+		top: -1
 	}
 });
 // ** Collection **
@@ -89,34 +90,37 @@ var SelfieView = Backbone.View.extend({
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
-		var rot = Math.random()*30-15+'deg';
-		var left = Math.random()*50+'px';
-		var top = Math.random()*300+'px';
+
+		/* Since these all get set at once, just checking the 'rot' for a -1 value should be sufficient */
+		if (-1 == this.model.get("rot")){
+			this.model.set({'rot' 	: Math.random()*30-15+'deg'});
+  			this.model.set({'left' 	: Math.random()*50+'px'});
+			this.model.set({'top'	: Math.random()*300+'px'});
+		}
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		if (organized === 0)
-		{
-  	this.$el
-  	.css('-webkit-transform' , 'rotate('+rot+')')
-  	.css('-moz-transform' , 'rotate('+rot+')')
-  	.css('top' , left)
-  	.css('left' , top)
-  	.draggable({
-  		start: function(event, ui) {
-  			zindex++;
-  			var cssObj = { 'z-index' : zindex };
-  			$(this).css(cssObj);
-  		}
-  	})
-  	.mouseup(function(){
-  		zindex++;
-  		$(this).css('z-index' , zindex);
-  	})
-  	.dblclick(function(){
-  		$(this).css('-webkit-transform' , 'rotate(0)');
-  		$(this).css('-moz-transform' , 'rotate(0)');
-  	});
-
+  {
+  this.$el
+		.css('-webkit-transform' , 'rotate('+this.model.get('rot')+')')
+		  .css('-moz-transform' , 'rotate('+this.model.get('rot')+')')
+			.css('top' , this.model.get('top'))
+			.css('left' , this.model.get('left'))
+			.draggable({
+  			start: function(event, ui) {
+   			zindex++;
+   			var cssObj = { 'z-index' : zindex };
+   			$(this).css(cssObj);
+  			}
+ 			})
+ 			.mouseup(function(){
+ 				zindex++;
+ 				$(this).css('z-index' , zindex);
+ 			})
+ 			.dblclick(function(){
+	  			$(this).css('-webkit-transform' , 'rotate(0)');
+	  			$(this).css('-moz-transform' , 'rotate(0)');
+			});
   }
   return this
 },
@@ -184,7 +188,7 @@ var SelfieListView = Backbone.View.extend({
 	}
 })
 
-// ** Document Ready ** 
+// ** Document Ready **
 $(function(){
 	var selfies_collection = new SelfieCollection();
 	var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});

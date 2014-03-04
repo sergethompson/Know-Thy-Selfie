@@ -1,22 +1,30 @@
 <!DOCTYPE>
 <html>
-<head>
+	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
 	<title>Know Thy Selfie</title>
-</head>
-<body>
+	</head>
+	<body>
+
+
+
+
+	<!-- slideout polaroid -->
 	<div id="slideout">
+	  <div id="slideout_inner">
 	  	<h4 id='tab'>Camera</h4>
-	  	<div id="slideout_inner">
-		<div id="wrapper">
-			<div id="example"></div>
-			<div id="gallery"></div>
-		</div>
-		<form id="selfie-form">
+			<!-- <div id="flash"></div> -->
+			<div id="wrapper">
+				<div id="gallery"></div>
+			</div>
+			<!-- <div id="pic-fade"></div> -->
+			<img id="camera" src='/assets/base_camera.png'>
+			<div style="z-index:4;" id="example"></div>
+			<form id="selfie-form">
 			<div class="centered">
-				<button class="btn btn-large btn-warning center" type="submit">Click to Submit Selfie!!!</button>
+				<button id="selfie-submit" class="btn btn-large btn-warning center" type="submit">Submit Your Selfie</button>
 			</div>
 		</form>
 	  </div>
@@ -25,8 +33,6 @@
 	<br>
 	<br>
 	<div class="centered row" id="selfies-list"></div>
-
-
 
 	<script id="selfieview-template" type='text/template'>
 		<div class="col-md-3">
@@ -52,7 +58,6 @@
 
 
 
-
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.min.js"></script>
 
@@ -61,3 +66,12 @@
 </body>
 </html>
 
+<!-- <div id="slideout">
+	  	<h4 id='tab'>Camera</h4>
+	  	<div id="slideout_inner">
+		<div id="wrapper">
+			<div id="example"></div>
+			<div id="gallery"></div>
+		</div>
+		</div>
+	</div> -->

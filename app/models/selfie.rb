@@ -58,6 +58,10 @@ class Selfie < ActiveRecord::Base
 			ret_string_ar.push("Nice smile!  Bangkok has the most smiles")
 		end
 
+		if (face["smile"] < 0.2)
+			ret_string_ar.push("Hardly anyone smiles in Moscow")
+		end
+
 
 		if (face["sex"].abs < 0.20)
 			ret_string_ar.push("Foxy lady!")
@@ -74,7 +78,7 @@ class Selfie < ActiveRecord::Base
 		end
 
 		if (face["eye_closed"] > 0.50)
-			ret_string_ar.push("Am I boring you?")
+			ret_string_ar.push("Are you winking at me with both eyes?")
 		end
 
 
