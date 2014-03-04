@@ -62,7 +62,7 @@ var SelfieFormView = Backbone.View.extend({
 	},
 	getSelfieData: function(){
 		var imgElem = $('#gallery img')[0].src;
-		var selfieData = new Selfie({ photobooth_image_data: imgElem});
+		var selfieData = new Selfie({ photobooth_image_data: imgElem, show_url: imgElem});
 		return selfieData
 	},
 	submitCallback: function(e){
@@ -169,14 +169,14 @@ show: function(e) {
 		.append('div')
 		.style("background-color", "blue")
 		.style("height", "200px")			
-		// .transition()
-		// .duration(3000)
+		.transition()
+		.duration(3000)
 		.text(function(d){
 			return d.age
 		})
 		.style('width' , function(d){return d.age/5 + 'px';} )
-		// .transition()
-		// .duration(3000);
+		.transition()
+		.duration(3000);
 	},
 	destroy: function(e){
 		e.preventDefault();
