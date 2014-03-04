@@ -96,45 +96,6 @@ var SelfieView = Backbone.View.extend({
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		if (organized === 0)
 		{
-
-
-
-
-
-
-
-  	//////////////////////////////////////////////
-  	console.log(this.$('#stats-view')[0])
-  	//console.log(this.el);
-  	//console.log(this.model.get("age"))
-
-  		///////////// ***************** d3 start ???
-  		// var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([{"age":this.model.get("age"),"weight":4000}]);
-
-  		// projection.enter()
-  		// .append('div')
-  		// .style("background-color", "blue")			
-  		// .transition()
-  		// .duration(3000)
-  		// .text(function(d){
-  		// 	return d.age
-  		// })
-  		// .style('width' , function(d){return d.age + 'px';} )
-  		// .transition()
-  		// .duration(3000);
-			//****************
-  	/////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
   	this.$el
   	.css('-webkit-transform' , 'rotate('+rot+')')
   	.css('-moz-transform' , 'rotate('+rot+')')
@@ -163,43 +124,53 @@ var SelfieView = Backbone.View.extend({
 show: function(e) {
 	e.preventDefault();
 		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
-		var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([{"age":this.model.get("age"),"weight":4000}]);
+		var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([
+			{"value":this.model.get("sex"),"name":"sex"}, 
+			{"value":this.model.get("confused"),"name":"confused"},
+			{"value":this.model.get("angry"),"name":"angry"},
+			{"value":this.model.get("glasses"),"name":"glasses"},
+			{"value":this.model.get("happy"),"name":"happy"},
+			{"value":this.model.get("sad"),"name":"sad"},
+			{"value":this.model.get("calm"),"name":"calm"},
+			{"value":this.model.get("race_conf"),"name":"race_conf"},
+			{"value":Math.abs(this.model.get("roll")/90),"name":"roll"},
+			{"value":Math.abs(this.model.get("pitch")/90),"name":"pitch"},
+			{"value":Math.abs(this.model.get("yaw")/90),"name":"yaw"},
+			{"value":this.model.get("smile"),"name":"smile"},
+			{"value":this.model.get("surprised"),"name":"surprised"},
+			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
+			{"value":this.model.get("glases"),"name":"glases"}
+			]);
+
+
+
+
 
 		projection.enter()
 		.append('div')
-		.style("background-color", "blue")
-		.style("height", "200px")			
+		.style("background-color", "black")
+		.style("height", "1.5em")
+		.style("float", "left")
+		.style("margin", ".3em")
 		.transition()
 		.duration(3000)
-		.text(function(d){
-			return d.age
-		})
-		.style('width' , function(d){return d.age/5 + 'px';} )
+		// .text(function(d){
+		// 	return d.name
+		// })
+		.style('width' , function(d){return d.value*5 + .5 + 'px';} )
 		.transition()
 		.duration(3000);
+
+
+
+
 	},
 	destroy: function(e){
 		e.preventDefault();
 		this.model.destroy();
 	}
 });
-/////////////////////////////////////////////////////////////////////
-var SelfieStatView = Backbone.View.extend({
-	id: 'vis',
-	initialize: function(){
-		this.vis = d3.select(this.el)
-	},
 
-
-	renderStats: function(){
-
-
-
-	}
-
-
-});
-////////////////////////////////////////////////////////////////////////////
 
 // ** List View **
 var SelfieListView = Backbone.View.extend({
