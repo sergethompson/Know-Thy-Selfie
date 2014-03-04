@@ -99,34 +99,48 @@ var SelfieView = Backbone.View.extend({
 		}
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
-		if (organized === 0)
-  {
-  this.$el
-		.css('-webkit-transform' , 'rotate('+this.model.get('rot')+')')
-		  .css('-moz-transform' , 'rotate('+this.model.get('rot')+')')
-			.css('top' , this.model.get('top'))
-			.css('left' , this.model.get('left'))
-			.draggable({
-  			start: function(event, ui) {
-   			zindex++;
-   			var cssObj = { 'z-index' : zindex };
-   			$(this).css(cssObj);
-  			}
- 			})
- 			.mouseup(function(){
- 				zindex++;
- 				$(this).css('z-index' , zindex);
- 			})
- 			.dblclick(function(){
-	  			$(this).css('-webkit-transform' , 'rotate(0)');
-	  			$(this).css('-moz-transform' , 'rotate(0)');
-			});
-  }
-  return this
-},
 
-show: function(e) {
-	e.preventDefault();
+		if (organized === 0){
+			this.$el
+				.css('-webkit-transform' , 'rotate('+this.model.get('rot')+')')
+				.css('-moz-transform' , 'rotate('+this.model.get('rot')+')')
+				.css('top' , this.model.get('top'))
+				.css('left' , this.model.get('left'))
+				.draggable({
+					start: function(event, ui) {
+						zindex++;
+						var cssObj = { 'z-index' : zindex };
+						$(this).css(cssObj);
+					}
+				})
+				.mouseup(function(){
+					zindex++;
+					$(this).css('z-index' , zindex);
+				})
+				.dblclick(function(){
+		  			$(this).css('-webkit-transform' , 'rotate(0)');
+		  			$(this).css('-moz-transform' , 'rotate(0)');
+				});
+				// console.log(this);
+				// console.log(this.model.get("json_analysis").url);
+				// console.log(this.model.get("json_analysis").url);
+
+				// console.log("Inspecting this.$el.css to determine if it has a z-index set");
+//				console.log("z-index is: ["+ this.$el.css('z-index') + "]")
+//				if(null == this.$el.css('z-index')){
+				// 	console.log(">>>>>>>>>>>>>>>>Setting z-index");
+				// 	// console.log("Inspecting this.$el.css to determine if it has a z-index set: IT DOES NOT...  Setting one");
+//				 	this.$el.css('z-index' , zindex);
+//				 }
+				// else{
+				// 	console.log("Inspecting this.$el.css to determine if it has a z-index set: IT DOES");
+				// }
+		}
+		return this
+	},
+
+	show: function(e) {
+		e.preventDefault();
 		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
 		var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([
 			{"value":this.model.get("sex"),"name":"sex"}, 
