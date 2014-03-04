@@ -1,4 +1,8 @@
+var dino_data = [{"name":"ACROCANTHOSAURUS","weight":4000}];
+var organized = 0
 
+// Sets zindex outside functions to be used later unrestricted
+var zindex = 1;
 // Fix security concerns with rails
 Backbone.sync = (function(original) {
   return function(method, model, options) {
@@ -9,29 +13,39 @@ Backbone.sync = (function(original) {
   };
 })(Backbone.sync);
 
-//Fix underscore problems with erb
-
-// _.templateSettings = {
-//     interpolate: /\{\{\=(.+?)\}\}/g,
-//     evaluate: /\{\{(.+?)\}\}/g
-// };
-
 // ** Model **  
 
 var Selfie = Backbone.Model.extend({
 
 	defaults: {
 		show_url: "https://pbs.twimg.com/profile_images/378800000553651991/ac5d33362645c4f415a7933d3c296d70.jpeg",
+		caption: "Mysteriously empty caption",
 		image_url: "",
 		json_analysis: "",
 		votes: 0,
 		latitude: 0,
 		longitude: 0,
 		user_id: 0,
-		photobooth_image_data: ""
+		photobooth_image_data: "",
+		age: 0,
+		race_string: "",
+		race_conf: 0,
+		confused: 0,
+		calm: 0,
+		angry: 0,
+		happy: 0,
+		sad: 0,
+		roll: 0,
+		pitch: 0,
+		yaw: 0,
+		smile: 0,
+		sex: 0,
+		surprised: 0,
+		eye_closed: 0,
+		glasses: 0
 	}
 });
-
+// ** Collection **
 var SelfieCollection = Backbone.Collection.extend({
 	url: '/selfies',
 	initialize: function(){
@@ -40,7 +54,7 @@ var SelfieCollection = Backbone.Collection.extend({
 	model: Selfie
 });
 
-
+// ** Submit Button for adding selfie to collection **
 var SelfieFormView = Backbone.View.extend({
 	events:{
 		'submit' : 'submitCallback'
@@ -58,24 +72,56 @@ var SelfieFormView = Backbone.View.extend({
 	}
 });
 
-
+// ** Selfie View and setting actions on view (movable, alignable, clickable) **
 var SelfieView = Backbone.View.extend({
 	initialize: function(){
-		this.listenTo(this.model, 'remove', this.remove)
+		this.listenTo(this.model, 'remove', this.remove);
+		this.listenTo(this.model, 'change', this.render);
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
 		'click [id="show"]' : 'show'
 	},
-	tagnName: 'div',
+	tagName: 'div',
 
 	template_selfie: _.template( $("#selfieview-template").html() ),
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
+		var rot = Math.random()*30-15+'deg';
+  	var left = Math.random()*50+'px';
+		var top = Math.random()*300+'px';
+
 		this.$el.html(this.template_selfie( this.model.attributes ) );
+		if (organized === 0)
+  {
+  this.$el
+		.css('-webkit-transform' , 'rotate('+rot+')')
+	  .css('-moz-transform' , 'rotate('+rot+')')
+			.css('top' , left)
+			.css('left' , top)
+			.draggable({
+  			start: function(event, ui) {
+   			zindex++;
+   			var cssObj = { 'z-index' : zindex };
+   			$(this).css(cssObj);
+  			}
+ 			})
+ 			.mouseup(function(){
+ 				zindex++;
+ 				$(this).css('z-index' , zindex);
+ 			})
+ 			.dblclick(function(){
+	  			$(this).css('-webkit-transform' , 'rotate(0)');
+	  			$(this).css('-moz-transform' , 'rotate(0)');
+			});
+		console.log(this);
+		console.log(this.model.get("json_analysis").url);
+		console.log(this.model.get("json_analysis").url);
+  }
 		return this
 	},
+
 	show: function(e) {
 		e.preventDefault();
 		this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
@@ -84,29 +130,25 @@ var SelfieView = Backbone.View.extend({
 		e.preventDefault();
 		this.model.destroy();
 	}
-
-
 });
 
+// ** List View **
 var SelfieListView = Backbone.View.extend({
 	initialize: function(){
 		this.listenTo(this.collection, 'add', this.renderSelfie)
 	},
 	renderSelfie: function(instance_of_selfie){
 		instance_of_selfie.view = new SelfieView({model: instance_of_selfie})
-		this.$el.prepend( instance_of_selfie.view.render().el)
+		this.$el.append( instance_of_selfie.view.render().el)
 		return this;
 	}
 })
 
-
-
-
+// ** Document Ready ** 
 $(function(){
-var selfies_collection = new SelfieCollection();
-var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
-var selfie_form_view = new SelfieFormView({collection: selfies_collection,
- el: $('#selfie-form')})
+	var selfies_collection = new SelfieCollection();
+	var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
+	var selfie_form_view = new SelfieFormView({collection: selfies_collection, el: $('#selfie-form')})
 });
 
 

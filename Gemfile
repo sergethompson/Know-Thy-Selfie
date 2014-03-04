@@ -10,6 +10,7 @@ group :test do
   gem 'factory_girl_rails', '~> 4.0'
 end
 
+
 gem 'rmagick' # Ruby version of the ImageMagick library.  Needed for image manipulation (resizing)
 
 gem 'rekognize' #Image analysis library

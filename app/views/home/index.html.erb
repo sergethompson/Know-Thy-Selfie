@@ -1,15 +1,68 @@
 <!DOCTYPE>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-		<title>Photobooth.js</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+	<title>Know Thy Selfie</title>
 	</head>
 	<body>
-
-
-
 	<div id="slideout">
+	  	<h4 id='tab'>Camera</h4>
+	  	<div id="slideout_inner">
+		<div id="wrapper">
+			<div id="example"></div>
+			<div id="gallery"></div>
+		</div>
+		<form id="selfie-form">
+			<div class="centered">
+				<button class="btn btn-large btn-warning center" type="submit">Click to Submit Selfie!!!</button>
+			</div>
+		</form>
+	  </div>
+	</div>
+
+	<br>
+	<br>
+	<div class="centered row" id="selfies-list"></div>
+
+	<script id="selfieview-template" type='text/template'>
+		<div class="col-md-3">
+			<div class="selfie">
+				<img class="selfie-image" id="show" src="<%%= show_url %>">
+				<div class="caption">
+					<h2 class="caption_text"><%%= caption %></h2>
+					<div id="stats-view"></div>
+					<button id="show">Show Votes</button>
+					<button data-action="destroy">Delete</button>
+				</div>
+			</div>
+		</div>
+	</script>
+
+
+	<script id="selfieview-stats-template" type='text/template'>
+		<div class="stats">
+			<h3>
+				<%%= glasses %>
+			</h3>
+		</div>
+		<section id='dino-field'></section>
+	</script>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.min.js"></script>
+
+	<%= csrf_meta_tag %>
+
+</body>
+</html>
+
+
+<!-- slideout polaroid -->
+<div id="slideout">
   	<h4 id='tab'>Camera</h4>
 	  <div id="slideout_inner">
 			<!-- <div id="flash"></div> -->
@@ -21,40 +74,3 @@
 			<div style="z-index:4;" id="example"></div>
 	  </div>
 	</div>
-
-
-		<br>
-		<div class="centered" id="selfies-list"></div>
-
-
-
-
-	<script id="selfieview-template" type='text/template'>
-	<div class="selfie">
-		<img class="rounded" id="show" src="<%%= show_url %>">
-		<p>
-			<%%= json_analysis %>
-		</p>
-		<div id="stats-view"></div>
-		<button data-action="destroy">Delete</button>
-	</div>
-	</script>
-
-
-
-	<script id="selfieview-stats-template" type='text/template'>
-	<div class="stats">
-		<h3>
-			<%%= votes %>
-		</h3>
-	</div>
-	</script>
-
-
-
-
-	<%= csrf_meta_tag %>
-
-</body>
-</html>
-

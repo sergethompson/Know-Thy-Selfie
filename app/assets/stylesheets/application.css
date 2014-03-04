@@ -12,24 +12,29 @@
  *= require_self
  *= require_tree .
  */
- /*body{
- /*	background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");
- */
 
- /*	background-image: url("/assets/wood_00326565.jpg");
 
- }*/
+body{
+ 	/*background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");*/
 
-/*Selfie Styling*/
-/* .centered
- {
-     text-align:center;
+
+ 	background-image: url("/assets/wood_00326565.jpg");
+
  }
- h2
- {
- 	font-size: 1.5em;
- 	font-family: 'Permanent Marker', cursive;
- }
+
+.caption_text{
+	font-family: 'Permanent Marker', cursive;
+}
+
+.centered
+{
+    text-align:center;
+}
+h2
+{
+	font-size: 1.5em;
+	font-family: 'Permanent Marker', cursive;
+}
 
  .selfie-image
  {
@@ -40,7 +45,7 @@
  {
  	margin-top: -1.5em;
  	max-height: 8em;
- }*/
+ }
  .selfie
  {
  	width: 23.33em;
@@ -55,8 +60,7 @@
      margin:25px 0 0 15px;
  }
 
- /*#selfies-list
- {
+#selfie-list {
  	height: 100%;
  	width: 90%;
  }
@@ -65,17 +69,6 @@
 
  }
 
-.centered
-{
-    text-align:center;
-}
-
-.rounded
-{
-	border-radius: 100%;
-}
-*/
-/*Slideout styling*/
 #slideout {
   position: fixed;
   top: 100px;
@@ -87,23 +80,24 @@
   transition-duration: 0.3s;
 }
 #slideout_inner {
-padding: 10px 25px;
-background-color: #D9E8F5    ;
-width: 465px;
+				padding: 10px 25px;
+				background-color: #D9E8F5    ;
+				width: 465px;
   position: fixed;
   top: -10px;
-  /*left: -465px;*/
+  left: -465px;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-/*#slideout:hover {
+
+#slideout:hover {
   left:465px;
 }
 #slideout:hover #slideout_inner {
   left: 0;
-}*/
+}
 h4#tab{
 border-bottom-left-radius: 2em;
 border-bottom-right-radius: 2em ;
