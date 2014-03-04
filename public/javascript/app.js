@@ -18,7 +18,7 @@ var Selfie = Backbone.Model.extend({
 
 	defaults: {
 		show_url: "https://pbs.twimg.com/profile_images/378800000553651991/ac5d33362645c4f415a7933d3c296d70.jpeg",
-		caption: "Mysteriously empty caption",
+		caption: "",
 		image_url: "",
 		json_analysis: "",
 		votes: 0,
@@ -47,6 +47,32 @@ var Selfie = Backbone.Model.extend({
 		top: -1
 	}
 });
+
+// Normalize sex values so that when we have a "male", we can show a "100% confidence" in the subject being male, and a 100% confidence when a subject is female
+// 1.0 = 100% confidence in male
+// 0.0 = 100% confidence in female
+var getNormalizedConfidenceOfSex = function(inModel) {
+	var confidence = inModel.get("sex");
+	if (confidence > 0.50){
+		return confidence * 2; // It's a boy!
+	}
+	else{
+		return (1-(2*confidence);
+	}
+}
+
+// Normalize sex string.  If greater than 50%
+var getSexString = function(inModel) {
+	var confidence = inModel.get("sex");
+	if (confidence > 0.50){
+		return "Male"; // It's a boy!
+	}
+	else{
+		return "Female"; // It's a girl!
+	}
+}
+
+
 // ** Collection **
 var SelfieCollection = Backbone.Collection.extend({
 	url: '/selfies',
