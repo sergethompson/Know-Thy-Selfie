@@ -57,7 +57,7 @@ var getNormalizedConfidenceOfSex = function(inModel) {
 		return confidence * 2; // It's a boy!
 	}
 	else{
-		return (1-(2*confidence);
+		return (1-(2*confidence));
 	}
 }
 
