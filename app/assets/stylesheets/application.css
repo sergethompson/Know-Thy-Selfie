@@ -22,6 +22,10 @@ body{
 
 }
 
+.caption_text{
+	font-family: 'Permanent Marker', cursive;
+}
+
 .centered
 {
     text-align:center;
