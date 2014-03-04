@@ -80,8 +80,8 @@ var SelfieView = Backbone.View.extend({
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
-		'click [id="show"]' : 'show',
-		'click [id="stats"]' : 'stats'
+		//'click [id="show"]' : 'show',
+		//'click [id="stats"]' : 'stats'
 	},
 	tagName: 'div',
 
@@ -96,8 +96,45 @@ var SelfieView = Backbone.View.extend({
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		if (organized === 0)
   {
-  	console.log(this.el);
-  	console.log(this.model.get("age"))
+
+
+
+
+
+
+
+  	//////////////////////////////////////////////
+  	console.log(this.$('#stats-view')[0])
+  	//console.log(this.el);
+  	//console.log(this.model.get("age"))
+
+  		///////////// ***************** d3 start ???
+			var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([{"age":this.model.get("age"),"weight":4000}]);
+
+			projection.enter()
+		.append('div')
+				.style("background-color", "blue")			
+			.transition()
+				.duration(3000)
+	.text(function(d){
+		return d.age
+	})
+		.style('width' , function(d){return d.age + 'px';} )
+		.transition()
+				.duration(3000);
+			//****************
+  	/////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
   this.$el
 		.css('-webkit-transform' , 'rotate('+rot+')')
 	  .css('-moz-transform' , 'rotate('+rot+')')
@@ -142,20 +179,7 @@ var SelfieStatView = Backbone.View.extend({
 
 	renderStats: function(){
 
-		///////////// ***************** d3 start ???
-			d3.select(this.$el).selectAll('div').data([{"age":this.model.get("age"),"weight":4000}])
-			.enter()
-		.append('div')			
-			.transition()
-				.duration(3000)
-	.text(function(d){
-		return d.age
-	})
-		.style('width' , function(d){return d.age + 'px';} )
-		.transition()
-				.duration(3000)
-				.style("background-color", "blue");
-			//****************
+	
 
 	}
 
