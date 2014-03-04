@@ -146,10 +146,6 @@ show: function(e) {
 			{"value":this.model.get("glases"),"name":"glases"}
 			]);
 
-
-
-
-
 		projection.enter()
 		.append('div')
 		.style("background-color", "black")
@@ -164,11 +160,8 @@ show: function(e) {
 		.style('width' , function(d){return d.value*5 + .5 + 'px';} )
 		.transition()
 		.duration(3000);
-
-
-
-
 	},
+	
 	destroy: function(e){
 		e.preventDefault();
 		this.model.destroy();
