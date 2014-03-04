@@ -10,11 +10,11 @@
     outline: none;
 }
 #pic-fade{
+    top: 135px;
+    width: 21em;
+    left: 168px;
     position: absolute;
-    width: 215px;
-    height: 170px;
-    left: 102px;
-    top: 99px;
+    height: 237px;
     background: #381e18;
     z-index: 3;
 }
@@ -32,18 +32,6 @@
     top: 330px;
     left: 75px;
     z-index: 2;
-}
-
-
-#flash{
-    content: " ";
-    display: table;
-    position: absolute;
-    top: 30px;
-    left: 0;
-    width:100%;
-    height: 100%;
-    z-index: 5;
 }
 
 #new-selfie{

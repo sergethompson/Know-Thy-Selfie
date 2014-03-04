@@ -1,17 +1,17 @@
 $(function(){
 	$( '#example' ).photobooth().on( "image", function( event, dataUrl ){
 		$(".photobooth canvas, .blind, ul").css("display", "none")
-		//     $('#flash').css('background-color','white');
-		//     setTimeout(function() {
-		//     $('#flash').css('background-color','')
-		// }, 50);
-		//     setTimeout(function() {
-		//         $('#flash').css('background-color','white')}, 125);
-		//     setTimeout(function() {
-		//     $('#flash').css('background-color','')
-		// }, 175);
-		$("#gallery").append('<div id="new-selfie"></div>')
-		$('#new-selfie').html( '<img src="' + dataUrl + '" >')
+		    $(document.body).hide
+		    setTimeout(function() {
+		    $(document.body).show()
+		}, 50);
+		    setTimeout(function() {
+		        $(document.body).hide()}, 125);
+		    setTimeout(function() {
+		    $(document.body).show()
+		}, 175);
+		$("#gallery").append('<div id="new-selfie"></div>');
+		$('#new-selfie').html( '<img src="' + dataUrl + '" >');
 		$( "#gallery" ).show();
 		$("#gallery" ).animate({ top: "+=175px" }, 4000);
 		$( "#pic-fade" ).animate({ top: "+=175px" }, 4000);
