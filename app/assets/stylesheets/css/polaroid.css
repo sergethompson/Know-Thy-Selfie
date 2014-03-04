@@ -1,11 +1,11 @@
 #snap_btn{
     position: absolute;
-    left: -65px;
+    left: -105px;
     width: 53.4em;
     height: 37em;
     z-index: 4;
     background-size: 100%;
-    top: -385px;
+    top: -487px;
     border: none;
     outline: none;
 }
@@ -21,8 +21,8 @@
 
 #gallery img {
     position: absolute;
-    width: 20em;
-    left: 24px;
+    width: 21em;
+    left: 15px;
 }
 #wrapper, #example{
     margin: 0 auto;
@@ -48,7 +48,7 @@
 
 #new-selfie{
    width: 23.33em;
-   height: 28.33em;
+   height: 23.33em;
    padding: 14px 10px 50px 10px;
    background: #eee;
    border: 1px solid #fff;
