@@ -21,8 +21,15 @@ body{
 
  }
 
+#colright-d3
+{
+	width: 30em;
+}
 #stats-view div{
 	width: 0px;
+}
+#stats-view{
+	width: 30em;
 }
 .caption_text{
 	font-family: 'Permanent Marker', cursive;

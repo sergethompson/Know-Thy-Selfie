@@ -81,7 +81,8 @@ var SelfieView = Backbone.View.extend({
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
-		'click [id="show"]' : 'show'
+		'click [id="show"]' : 'show',
+		'click [id="stats-slide"]' : 'showSlide'
 		//'click [id="stats"]' : 'stats'
 	},
 	tagName: 'div',
@@ -163,18 +164,77 @@ var SelfieView = Backbone.View.extend({
 		projection.enter()
 		.append('div')
 		.style("background-color", "black")
-		.style("height", "1.5em")
+		.style("height", "2em")
 		.style("float", "left")
-		.style("margin", ".3em")
+		.style("margin", ".25em")
 		.transition()
 		.duration(3000)
 		// .text(function(d){
 		// 	return d.name
 		// })
-		.style('width' , function(d){return d.value*5 + .5 + 'px';} )
+		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
 		.transition()
 		.duration(3000);
 	},
+
+
+		showSlide: function(e) {
+		e.preventDefault();
+		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
+		var slideData = 
+		[
+			{"value":this.model.get("sex"),"name":"sex"}, 
+			{"value":this.model.get("confused"),"name":"confused"},
+			{"value":this.model.get("angry"),"name":"angry"},
+			{"value":this.model.get("glasses"),"name":"glasses"},
+			{"value":this.model.get("happy"),"name":"happy"},
+			{"value":this.model.get("sad"),"name":"sad"},
+			{"value":this.model.get("calm"),"name":"calm"},
+			{"value":this.model.get("race_conf"),"name":this.model.get("race_string")},
+			{"value":Math.abs(this.model.get("roll")/90),"name":"roll"},
+			{"value":Math.abs(this.model.get("pitch")/90),"name":"pitch"},
+			{"value":Math.abs(this.model.get("yaw")/90),"name":"yaw"},
+			{"value":this.model.get("smile"),"name":"smile"},
+			{"value":this.model.get("surprised"),"name":"surprised"},
+			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
+			{"value":this.model.get("glasses"),"name":"glasses"}
+			];
+		$('#colright-d3').empty();
+		var projectionSlide = d3.select('#colright-d3').selectAll('div').data(slideData);
+		projectionSlide.enter()
+		.append('div')
+		.style("background-color", "yellow")
+		.style("height", "2em")
+		.style("float", "left")
+		.style("margin", ".25em")
+		.transition()
+		.duration(3000)
+		// .text(function(d){
+		// 	return d.name
+		// })
+		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
+		.transition()
+		.duration(3000);
+
+		/////********** this is li row data of barcode
+			$('#slide-li-d3').empty();
+		var projectionSlide = d3.select('#slide-li-d3').selectAll('li').data(slideData);
+		projectionSlide.enter()
+		.append('li')
+		.style("background-color", "yellow")
+		.style("height", "2em")
+		// .style("float", "left")
+		// .style("margin", ".25em")
+		.transition()
+		.duration(3000)
+		.text(function(d){
+			return d.name
+		})
+		.style('width' , function(d){return d.value*150 + 2 + 'px';} )
+		.transition()
+		.duration(3000);
+	},
+
 	
 	destroy: function(e){
 		e.preventDefault();
