@@ -1,3 +1,40 @@
+#snap_btn{
+    position: absolute;
+    width: 34em;
+    height: 23.6em;
+    z-index: 4;
+    background-size: 100%;
+    top: -320px;
+    border: none;
+    outline: none;
+}
+#pic-fade{
+    position: absolute;
+    width: 215px;
+    height: 170px;
+    left: 102px;
+    top: 99px;
+    background: #381e18;
+    z-index: 3;
+}
+
+#gallery img {
+    position: absolute;
+    top: -564px;
+    width: 20em;
+    left: 95px;
+}
+#wrapper, #example{
+    margin: 0 auto;
+    position: absolute;
+    width: 80%;
+    height: 300px;
+    top: 330px;
+    left: 75px;
+    z-index: 2;
+}
+
+
 #flash{
     content: " ";
     display: table;
@@ -8,21 +45,8 @@
     height: 100%;
     z-index: 5;
 }
-#upper-polaroid{
-    position: absolute;
-    z-index: 4;
-    width: 80%;
-}
-#pic-fade{
-    position: absolute;
-    width: 215px;
-    height: 220px;
-    left: 200px;
-    top: 65px;
-    background: #381e18;
-    z-index: 3;
-}
-/*#snoop{
+
+/*#new-selfie{
     box-shadow: 0px 6px 20px #000;
     -moz-box-shadow: 0px 6px 20px #000;
     -webkit-box-shadow: 0px 6px 20px #000;
@@ -34,6 +58,6 @@
 }*/
 #camera{
     position: absolute;
-    width: 80%;
+    width: 34em;
     z-index: 1;
 }

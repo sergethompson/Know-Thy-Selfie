@@ -12,7 +12,58 @@
  *= require_self
  *= require_tree .
  */
+ /*body{
+ /*	background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");
+ */
 
+ /*	background-image: url("/assets/wood_00326565.jpg");
+
+ }*/
+
+/*Selfie Styling*/
+/* .centered
+ {
+     text-align:center;
+ }
+ h2
+ {
+ 	font-size: 1.5em;
+ 	font-family: 'Permanent Marker', cursive;
+ }
+
+ .selfie-image
+ {
+ 	width: 20em;
+ 	height: 20.83em;
+ }
+ .caption
+ {
+ 	margin-top: -1.5em;
+ 	max-height: 8em;
+ }*/
+ .selfie
+ {
+ 	width: 23.33em;
+ 	height: 28.33em;
+ 	 padding: 14px 10px 50px 10px;
+     background: #eee;
+     border: 1px solid #fff;
+     box-shadow: 0px 2px 15px #333;
+     -moz-box-shadow: 0px 2px 15px #333;
+     -webkit-box-shadow: 0px 2px 15px #333;
+     position: absolute;
+     margin:25px 0 0 15px;
+ }
+
+ /*#selfies-list
+ {
+ 	height: 100%;
+ 	width: 90%;
+ }
+ .ui-draggable
+ {
+
+ }
 
 .centered
 {
@@ -22,4 +73,68 @@
 .rounded
 {
 	border-radius: 100%;
+}
+*/
+/*Slideout styling*/
+#slideout {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 1000;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+#slideout_inner {
+padding: 10px 25px;
+background-color: #D9E8F5    ;
+width: 465px;
+  position: fixed;
+  top: -10px;
+  /*left: -465px;*/
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+/*#slideout:hover {
+  left:465px;
+}
+#slideout:hover #slideout_inner {
+  left: 0;
+}*/
+h4#tab{
+border-bottom-left-radius: 2em;
+border-bottom-right-radius: 2em ;
+position:relative;
+background-color: green ;
+display: block;
+width: 127px;
+height: 38px;
+margin-top: 45px;
+right: 50px;
+padding: 14px 5px;
+color: white;
+font-family: 'ubuntu';
+font-size: 12px;
+text-transform: uppercase;
+letter-spacing: 1px;
+
+
+-webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+
+  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+
+  /* Should be unset in IE9+ I think. */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
