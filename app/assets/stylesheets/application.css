@@ -116,19 +116,19 @@ transform-origin: 50% 50%;
 				width: 465px;
   position: fixed;
   top: -10px;
-  left: -613px;
+/*  left: -613px;*/
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
 
-#slideout:hover {
+/*#slideout:hover {
   left:465px;
 }
 #slideout:hover #slideout_inner {
   left: 0;
-}
+}*/
 h4#tab{
 box-shadow: -4px 7px 10px #3b2e1b;
 border-bottom-left-radius: 2em;
