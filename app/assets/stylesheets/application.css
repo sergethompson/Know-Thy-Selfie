@@ -15,12 +15,15 @@
 
 
 body{
- 	background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");
+	background-image: url("/assets/Vertical_reddish_wood_with_nailheads.jpg");
 
    	/*background-image: url("/assets/wood_00326565.jpg");*/
 
  }
 
+#stats-view div{
+	width: 0px;
+}
 .caption_text{
 	font-family: 'Permanent Marker', cursive;
 }
@@ -65,7 +68,11 @@ h2
 }
 
 #selfie-submit{
-	box-shadow: 2px 6px 8px #3b2e1b;
+width: 223px;
+border-radius: 22px;
+font-weight: bold;
+text-shadow: 1px -3px #3b2e1b;
+box-shadow: 2px -10px 9px #3b2e1b inset;
 outline: none;
 background-color: #5a4023;
 height: 44px;
@@ -112,7 +119,7 @@ transform-origin: 50% 50%;
 				width: 465px;
   position: fixed;
   top: -10px;
-  left: -584px;
+  left: -613px;
   -webkit-transition-duration: 0.3s;
   -moz-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
@@ -126,36 +133,29 @@ transform-origin: 50% 50%;
   left: 0;
 }
 h4#tab{
+box-shadow: -4px 7px 10px #3b2e1b;
 border-bottom-left-radius: 2em;
-border-bottom-right-radius: 2em ;
-position:relative;
-background-color: green ;
-display: block;
-width: 127px;
-height: 38px;
-margin-top: 45px;
-right: 50px;
-padding: 14px 5px;
-color: white;
-font-family: 'ubuntu';
-font-size: 12px;
+border-bottom-right-radius: 2em;
+position: absolute;
+background-color: #d3d1bc;
+width: 101px;
+height: 43px;
+left: 584px;
+top: 29px;
+padding: 1px 6px;
+color: #333333;
+font-family: 'permanent marker';
+font-size: 20px;
 text-transform: uppercase;
 letter-spacing: 1px;
-
-
 -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-
-  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
-  -webkit-transform-origin: 50% 50%;
-  -moz-transform-origin: 50% 50%;
-  -ms-transform-origin: 50% 50%;
-  -o-transform-origin: 50% 50%;
-  transform-origin: 50% 50%;
-
-  /* Should be unset in IE9+ I think. */
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+-moz-transform: rotate(-90deg);
+-ms-transform: rotate(-90deg);
+-o-transform: rotate(-90deg);
+transform: rotate(-90deg);
+-webkit-transform-origin: 50% 50%;
+-moz-transform-origin: 50% 50%;
+-ms-transform-origin: 50% 50%;
+-o-transform-origin: 50% 50%;
+transform-origin: 50% 50%;
 }

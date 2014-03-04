@@ -1,16 +1,15 @@
-var dino_data = [{"name":"ACROCANTHOSAURUS","weight":4000}];
-var organized = 0
+var organized = 0;
 
 // Sets zindex outside functions to be used later unrestricted
 var zindex = 1;
 // Fix security concerns with rails
 Backbone.sync = (function(original) {
-  return function(method, model, options) {
-    options.beforeSend = function(xhr) {
-      xhr.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
-    };
-    original(method, model, options);
-  };
+	return function(method, model, options) {
+		options.beforeSend = function(xhr) {
+			xhr.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+		};
+		original(method, model, options);
+	};
 })(Backbone.sync);
 
 // ** Model **
@@ -64,13 +63,12 @@ var SelfieFormView = Backbone.View.extend({
 	},
 	getSelfieData: function(){
 		var imgElem = $('#gallery img')[0].src;
-		var selfieData = new Selfie({ photobooth_image_data: imgElem});
+		var selfieData = new Selfie({ photobooth_image_data: imgElem, show_url: imgElem});
 		return selfieData
 	},
 	submitCallback: function(e){
 		e.preventDefault();
 		var selfieData = this.getSelfieData();
-		//console.log(selfieData);
 		this.collection.create(selfieData);
 	}
 });
@@ -84,6 +82,7 @@ var SelfieView = Backbone.View.extend({
 	events: {
 		"click [data-action='destroy']" : 'destroy',
 		'click [id="show"]' : 'show'
+		//'click [id="stats"]' : 'stats'
 	},
 	tagName: 'div',
 
@@ -100,6 +99,7 @@ var SelfieView = Backbone.View.extend({
 		}
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
+
 		if (organized === 0){
 			this.$el
 				.css('-webkit-transform' , 'rotate('+this.model.get('rot')+')')
@@ -135,19 +135,53 @@ var SelfieView = Backbone.View.extend({
 				// else{
 				// 	console.log("Inspecting this.$el.css to determine if it has a z-index set: IT DOES");
 				// }
-				}
+		}
 		return this
 	},
 
 	show: function(e) {
 		e.preventDefault();
-		this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
+		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
+		var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([
+			{"value":this.model.get("sex"),"name":"sex"}, 
+			{"value":this.model.get("confused"),"name":"confused"},
+			{"value":this.model.get("angry"),"name":"angry"},
+			{"value":this.model.get("glasses"),"name":"glasses"},
+			{"value":this.model.get("happy"),"name":"happy"},
+			{"value":this.model.get("sad"),"name":"sad"},
+			{"value":this.model.get("calm"),"name":"calm"},
+			{"value":this.model.get("race_conf"),"name":"race_conf"},
+			{"value":Math.abs(this.model.get("roll")/90),"name":"roll"},
+			{"value":Math.abs(this.model.get("pitch")/90),"name":"pitch"},
+			{"value":Math.abs(this.model.get("yaw")/90),"name":"yaw"},
+			{"value":this.model.get("smile"),"name":"smile"},
+			{"value":this.model.get("surprised"),"name":"surprised"},
+			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
+			{"value":this.model.get("glases"),"name":"glases"}
+			]);
+
+		projection.enter()
+		.append('div')
+		.style("background-color", "black")
+		.style("height", "1.5em")
+		.style("float", "left")
+		.style("margin", ".3em")
+		.transition()
+		.duration(3000)
+		// .text(function(d){
+		// 	return d.name
+		// })
+		.style('width' , function(d){return d.value*5 + .5 + 'px';} )
+		.transition()
+		.duration(3000);
+
 	},
 	destroy: function(e){
 		e.preventDefault();
 		this.model.destroy();
 	}
 });
+
 
 // ** List View **
 var SelfieListView = Backbone.View.extend({
