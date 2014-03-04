@@ -1,5 +1,6 @@
 var dino_data = [{"name":"ACROCANTHOSAURUS","weight":4000}];
-var organized = 0
+var organized = 0;
+var projectionIndex = 1;
 
 // Sets zindex outside functions to be used later unrestricted
 var zindex = 1;
@@ -67,7 +68,6 @@ var SelfieFormView = Backbone.View.extend({
 	submitCallback: function(e){
 		e.preventDefault();
 		var selfieData = this.getSelfieData();
-		console.log(selfieData);
 		this.collection.create(selfieData);
 	}
 });
@@ -80,7 +80,8 @@ var SelfieView = Backbone.View.extend({
 	},
 	events: {
 		"click [data-action='destroy']" : 'destroy',
-		'click [id="show"]' : 'show'
+		'click [id="show"]' : 'show',
+		'click [id="stats"]' : 'stats'
 	},
 	tagName: 'div',
 
@@ -95,6 +96,8 @@ var SelfieView = Backbone.View.extend({
 		this.$el.html(this.template_selfie( this.model.attributes ) );
 		if (organized === 0)
   {
+  	console.log(this.el);
+  	console.log(this.model.get("age"))
   this.$el
 		.css('-webkit-transform' , 'rotate('+rot+')')
 	  .css('-moz-transform' , 'rotate('+rot+')')
@@ -115,9 +118,7 @@ var SelfieView = Backbone.View.extend({
 	  			$(this).css('-webkit-transform' , 'rotate(0)');
 	  			$(this).css('-moz-transform' , 'rotate(0)');
 			});
-		console.log(this);
-		console.log(this.model.get("json_analysis").url);
-		console.log(this.model.get("json_analysis").url);
+
   }
 		return this
 	},
@@ -131,6 +132,36 @@ var SelfieView = Backbone.View.extend({
 		this.model.destroy();
 	}
 });
+/////////////////////////////////////////////////////////////////////
+var SelfieStatView = Backbone.View.extend({
+	id: 'vis',
+	initialize: function(){
+		this.vis = d3.select(this.el)
+	},
+
+
+	renderStats: function(){
+
+		///////////// ***************** d3 start ???
+			d3.select(this.$el).selectAll('div').data([{"age":this.model.get("age"),"weight":4000}])
+			.enter()
+		.append('div')			
+			.transition()
+				.duration(3000)
+	.text(function(d){
+		return d.age
+	})
+		.style('width' , function(d){return d.age + 'px';} )
+		.transition()
+				.duration(3000)
+				.style("background-color", "blue");
+			//****************
+
+	}
+
+
+});
+////////////////////////////////////////////////////////////////////////////
 
 // ** List View **
 var SelfieListView = Backbone.View.extend({
