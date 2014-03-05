@@ -251,12 +251,7 @@ var SelfieView = Backbone.View.extend({
 		.style("background-color", "yellow")
 		.style("height", "2em")
 		.style("float", "left")
-		.style("margin", ".25em")
-		.transition()
-		.duration(3000)
-		// .text(function(d){
-		// 	return d.name
-		// })
+		.style("margin-right", ".5em")
 		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
 		.transition()
 		.duration(3000);
@@ -284,10 +279,11 @@ var SelfieView = Backbone.View.extend({
 			]);
 		projectionSlide.enter()
 		.append('div')
-		.style("background-color", "yellow")
+		.style("background-color", "red")
 		.style("height", "2em")
-		// .style("float", "left")
-		// .style("margin", ".25em")
+		.style("color", "aqua")
+		.style("font-size", "1.5em")
+		.style("font-family", 'Permanent Marker')
 		.transition()
 		.duration(3000)
 		.text(function(d){
