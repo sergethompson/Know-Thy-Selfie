@@ -209,7 +209,6 @@ var SelfieView = Backbone.View.extend({
 		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
 		var slideData = 
 		[
-
 			{"value":getNormalizedConfidenceOfSex(this.model),
 			"name":getSexString(this.model)}, 
 			{"value":this.model.get("confused"),"name":"confused"},
@@ -228,7 +227,25 @@ var SelfieView = Backbone.View.extend({
 			{"value":this.model.get("glasses"),"name":"glasses"}
 			];
 		$('#colright-d3').empty();
-		var projectionSlide = d3.select('#colright-d3').selectAll('div').data(slideData);
+		var projectionSlide = d3.select('#colright-d3').selectAll('div').data([
+
+			{"value":getNormalizedConfidenceOfSex(this.model),
+			"name":getSexString(this.model)}, 
+			{"value":this.model.get("confused"),"name":"confused"},
+			{"value":this.model.get("angry"),"name":"angry"},
+			{"value":this.model.get("glasses"),"name":"glasses"},
+			{"value":this.model.get("happy"),"name":"happy"},
+			{"value":this.model.get("sad"),"name":"sad"},
+			{"value":this.model.get("calm"),"name":"calm"},
+			{"value":this.model.get("race_conf"),"name":this.model.get("race_string")},
+			{"value":Math.abs(this.model.get("roll")/90),"name":"roll"},
+			{"value":Math.abs(this.model.get("pitch")/90),"name":"pitch"},
+			{"value":Math.abs(this.model.get("yaw")/90),"name":"yaw"},
+			{"value":this.model.get("smile"),"name":"smile"},
+			{"value":this.model.get("surprised"),"name":"surprised"},
+			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
+			{"value":this.model.get("glasses"),"name":"glasses"}
+			]);
 		projectionSlide.enter()
 		.append('div')
 		.style("background-color", "yellow")
@@ -245,10 +262,28 @@ var SelfieView = Backbone.View.extend({
 		.duration(3000);
 
 		/////********** this is li row data of barcode
-			$('#slide-li-d3').empty();
-		var projectionSlide = d3.select('#slide-li-d3').selectAll('li').data(slideData);
+			$('#slide-div-d3').empty();
+		var projectionSlide = d3.select('#slide-div-d3').selectAll('div').data([
+
+			{"value":getNormalizedConfidenceOfSex(this.model),
+			"name":getSexString(this.model)}, 
+			{"value":this.model.get("confused"),"name":"confused"},
+			{"value":this.model.get("angry"),"name":"angry"},
+			{"value":this.model.get("glasses"),"name":"glasses"},
+			{"value":this.model.get("happy"),"name":"happy"},
+			{"value":this.model.get("sad"),"name":"sad"},
+			{"value":this.model.get("calm"),"name":"calm"},
+			{"value":this.model.get("race_conf"),"name":this.model.get("race_string")},
+			{"value":Math.abs(this.model.get("roll")/90),"name":"roll"},
+			{"value":Math.abs(this.model.get("pitch")/90),"name":"pitch"},
+			{"value":Math.abs(this.model.get("yaw")/90),"name":"yaw"},
+			{"value":this.model.get("smile"),"name":"smile"},
+			{"value":this.model.get("surprised"),"name":"surprised"},
+			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
+			{"value":this.model.get("glasses"),"name":"glasses"}
+			]);
 		projectionSlide.enter()
-		.append('li')
+		.append('div')
 		.style("background-color", "yellow")
 		.style("height", "2em")
 		// .style("float", "left")

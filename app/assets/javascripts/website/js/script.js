@@ -1,6 +1,6 @@
 $(function(){
 	$( '#example' ).photobooth().on( "image", function( event, dataUrl ){
-		$(".photobooth canvas, .blind, ul").css("display", "none")
+		$(".photobooth canvas, .blind, #view_set_menu").css("display", "none")
 		    $(document.body).hide
 		    setTimeout(function() {
 		    $(document.body).show()
@@ -13,9 +13,10 @@ $(function(){
 		$("#gallery").append('<div id="new-selfie"></div>');
 		$('#new-selfie').html( '<img src="' + dataUrl + '" >');
 		$( "#gallery" ).show();
-		$("#gallery" ).animate({ top: "+=175px" }, 4000);
-		$( "#pic-fade" ).animate({ top: "+=175px" }, 4000);
-    $( "#pic-fade").delay(2000).fadeTo(3000, 0);
+		$("#gallery" ).animate({ top: "+=328px" }, 10000);
+		$( "#pic-fade" ).animate({ top: "+=328px" }, {duration: 10000, queue: false});
+		$( "#pic-fade" ).animate({ opacity: 0 }, {duration: 15000, queue: false});
+
 	});
 
 	/**
