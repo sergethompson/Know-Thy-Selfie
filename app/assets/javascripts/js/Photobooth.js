@@ -185,7 +185,7 @@ Photobooth = function( container )
 
 	var ePhotobooth = cE( "div" );
 	ePhotobooth.className = "photobooth";
-	ePhotobooth.innerHTML = '<input title="take picture" id="snap_btn" class="trigger"></input><div class="blind"></div><canvas></canvas><div class="warning notSupported">Sorry, Photobooth.js is not supported by your browser</div><div class="warning noWebcam">Please give Photobooth permission to use your Webcam. <span>Try again</span></div><ul><li title="hue"class="hue"></li><li title="saturation"class="saturation"></li><li title="brightness"class="brightness"></li><li title="crop"class="crop"></li></ul>';
+	ePhotobooth.innerHTML = '<input title="take picture" id="snap_btn" class="trigger"></input><div class="blind"></div><canvas></canvas><div class="warning notSupported">Sorry, Photobooth.js is not supported by your browser</div><div class="warning noWebcam">Please give Photobooth permission to use your Webcam. <span>Try again</span></div><ul id="view_set_menu"><li title="hue"class="hue"></li><li title="saturation"class="saturation"></li><li title="brightness"class="brightness"></li><li title="crop"class="crop"></li></ul>';
 
 
 	var eInput = cE( "canvas" );

@@ -1,6 +1,6 @@
 $(function(){
 	$( '#example' ).photobooth().on( "image", function( event, dataUrl ){
-		$(".photobooth canvas, .blind, ul").css("display", "none")
+		$(".photobooth canvas, .blind, #view_set_menu").css("display", "none")
 		    $(document.body).hide
 		    setTimeout(function() {
 		    $(document.body).show()
