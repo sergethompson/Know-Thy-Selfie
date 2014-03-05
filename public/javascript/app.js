@@ -54,10 +54,10 @@ var Selfie = Backbone.Model.extend({
 var getNormalizedConfidenceOfSex = function(inModel) {
 	var confidence = inModel.get("sex");
 	if (confidence > 0.50){
-		return confidence * 2; // It's a boy!
+		return ((confidence-0.5) * 2); // It's a boy!
 	}
 	else{
-		return (1-(2*confidence);
+		return (1-(2*confidence));
 	}
 }
 
@@ -209,7 +209,9 @@ var SelfieView = Backbone.View.extend({
 		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
 		var slideData = 
 		[
-			{"value":this.model.get("sex"),"name":"sex"}, 
+
+			{"value":getNormalizedConfidenceOfSex(this.model),
+			"name":getSexString(this.model)}, 
 			{"value":this.model.get("confused"),"name":"confused"},
 			{"value":this.model.get("angry"),"name":"angry"},
 			{"value":this.model.get("glasses"),"name":"glasses"},
