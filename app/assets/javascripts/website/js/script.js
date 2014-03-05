@@ -1,9 +1,9 @@
 $(function(){
 	$( '#example' ).photobooth().on( "image", function( event, dataUrl ){
 		$(".photobooth canvas, .blind, #view_set_menu").css("display", "none")
-		    $(document.body).hide
-		    setTimeout(function() {
-		    $(document.body).show()
+    $(document.body).hide
+    setTimeout(function() {
+	    $(document.body).show()
 		}, 50);
 		    setTimeout(function() {
 		        $(document.body).hide()}, 125);
@@ -16,8 +16,8 @@ $(function(){
 		$("#gallery" ).animate({ top: "+=328px" }, 10000);
 		$( "#pic-fade" ).animate({ top: "+=328px" }, {duration: 10000, queue: false});
 		$( "#pic-fade" ).animate({ opacity: 0 }, {duration: 15000, queue: false});
-
 	});
+
 
 	/**
 	* Tab boxes
