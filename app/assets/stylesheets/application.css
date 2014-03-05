@@ -24,6 +24,9 @@ body{
 #colright-d3
 {
 	width: 30em;
+  height: 32px;
+/*  position: absolute;
+  bottom: 0px;*/
 }
 #stats-view div{
 	width: 0px;

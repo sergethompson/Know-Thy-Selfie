@@ -226,6 +226,7 @@ var SelfieView = Backbone.View.extend({
 			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
 			{"value":this.model.get("glasses"),"name":"glasses"}
 			];
+
 		$('#colright-d3').empty();
 		var projectionSlide = d3.select('#colright-d3').selectAll('div').data([
 
@@ -249,17 +250,16 @@ var SelfieView = Backbone.View.extend({
 		projectionSlide.enter()
 		.append('div')
 		.style("background-color", "yellow")
-		.style("height", "2em")
 		.style("float", "left")
 		.style("margin", ".25em")
+		.style("height", "0px")
+		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
 		.transition()
 		.duration(3000)
+		.style("height", "32px")
 		// .text(function(d){
 		// 	return d.name
 		// })
-		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
-		.transition()
-		.duration(3000);
 
 		/////********** this is li row data of barcode
 			$('#slide-div-d3').empty();
