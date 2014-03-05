@@ -20,10 +20,18 @@ body{
    	/*background-image: url("/assets/wood_00326565.jpg");*/
 
  }
+#slide-div-d3
+{
+	width: 0px;
+}
 
 #colright-d3
 {
 	width: 30em;
+
+  height: 32px;
+/*  position: absolute;
+  bottom: 0px;*/
 }
 #stats-view div{
 	width: 0px;

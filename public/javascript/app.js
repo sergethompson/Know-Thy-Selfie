@@ -209,7 +209,6 @@ var SelfieView = Backbone.View.extend({
 		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
 		var slideData = 
 		[
-
 			{"value":getNormalizedConfidenceOfSex(this.model),
 			"name":getSexString(this.model)}, 
 			{"value":this.model.get("confused"),"name":"confused"},
@@ -227,32 +226,68 @@ var SelfieView = Backbone.View.extend({
 			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
 			{"value":this.model.get("glasses"),"name":"glasses"}
 			];
+
 		$('#colright-d3').empty();
-		var projectionSlide = d3.select('#colright-d3').selectAll('div').data(slideData);
+		var projectionSlide = d3.select('#colright-d3').selectAll('div').data([
+
+			{"value":getNormalizedConfidenceOfSex(this.model),
+			"name":getSexString(this.model)}, 
+			{"value":this.model.get("confused"),"name":"confused"},
+			{"value":this.model.get("angry"),"name":"angry"},
+			{"value":this.model.get("glasses"),"name":"glasses"},
+			{"value":this.model.get("happy"),"name":"happy"},
+			{"value":this.model.get("sad"),"name":"sad"},
+			{"value":this.model.get("calm"),"name":"calm"},
+			{"value":this.model.get("race_conf"),"name":this.model.get("race_string")},
+			{"value":Math.abs(this.model.get("roll")/90),"name":"roll"},
+			{"value":Math.abs(this.model.get("pitch")/90),"name":"pitch"},
+			{"value":Math.abs(this.model.get("yaw")/90),"name":"yaw"},
+			{"value":this.model.get("smile"),"name":"smile"},
+			{"value":this.model.get("surprised"),"name":"surprised"},
+			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
+			{"value":this.model.get("glasses"),"name":"glasses"}
+			]);
 		projectionSlide.enter()
 		.append('div')
 		.style("background-color", "yellow")
-		.style("height", "2em")
 		.style("float", "left")
 		.style("margin", ".25em")
+		.style("height", "0px")
+		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
 		.transition()
 		.duration(3000)
+		.style("height", "32px")
 		// .text(function(d){
 		// 	return d.name
 		// })
-		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
-		.transition()
-		.duration(3000);
+		/////********** this is div row data of barcode
+			$('#slide-div-d3').empty();
+		var projectionSlide = d3.select('#slide-div-d3').selectAll('div').data([
 
-		/////********** this is li row data of barcode
-			$('#slide-li-d3').empty();
-		var projectionSlide = d3.select('#slide-li-d3').selectAll('li').data(slideData);
+			{"value":getNormalizedConfidenceOfSex(this.model),
+			"name":getSexString(this.model)}, 
+			{"value":this.model.get("confused"),"name":"confused"},
+			{"value":this.model.get("angry"),"name":"angry"},
+			{"value":this.model.get("glasses"),"name":"glasses"},
+			{"value":this.model.get("happy"),"name":"happy"},
+			{"value":this.model.get("sad"),"name":"sad"},
+			{"value":this.model.get("calm"),"name":"calm"},
+			{"value":this.model.get("race_conf"),"name":this.model.get("race_string")},
+			{"value":Math.abs(this.model.get("roll")/90),"name":"roll"},
+			{"value":Math.abs(this.model.get("pitch")/90),"name":"pitch"},
+			{"value":Math.abs(this.model.get("yaw")/90),"name":"yaw"},
+			{"value":this.model.get("smile"),"name":"smile"},
+			{"value":this.model.get("surprised"),"name":"surprised"},
+			{"value":this.model.get("eye_closed"),"name":"eye_closed"},
+			{"value":this.model.get("glasses"),"name":"glasses"}
+			]);
 		projectionSlide.enter()
-		.append('li')
-		.style("background-color", "yellow")
+		.append('div')
+		.style("background-color", "red")
 		.style("height", "2em")
-		// .style("float", "left")
-		// .style("margin", ".25em")
+		.style("color", "aqua")
+		.style("font-size", "1em")
+		//.style("font-family", 'Permanent Marker')
 		.transition()
 		.duration(3000)
 		.text(function(d){
