@@ -265,10 +265,10 @@ var SelfieView = Backbone.View.extend({
 		var projectionSlide = d3.select('#slide-div-d3').selectAll('div').data([
 
 			{"value":getNormalizedConfidenceOfSex(this.model),
-			"name":getSexString(this.model)}, 
+			"name":getSexString(this.model)},
+			{"value":this.model.get("age")/100,"name":this.model.get("age")},
 			{"value":this.model.get("confused"),"name":"confused"},
 			{"value":this.model.get("angry"),"name":"angry"},
-			{"value":this.model.get("glasses"),"name":"glasses"},
 			{"value":this.model.get("happy"),"name":"happy"},
 			{"value":this.model.get("sad"),"name":"sad"},
 			{"value":this.model.get("calm"),"name":"calm"},
