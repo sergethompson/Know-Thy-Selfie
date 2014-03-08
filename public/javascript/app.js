@@ -127,10 +127,12 @@ var SelfieView = Backbone.View.extend({
 		});
 		/* Since these all get set at once, just checking the 'rot' for a -1 value should be sufficient */
 		if (-1 == this.model.get("rot")){
-			this.model.set({'rot' 	: Math.random()*30-15+'deg'});
-  			this.model.set({'left' 	: Math.random()*50+'px'});
-			this.model.set({'top'	: Math.random()*300+'px'});
-			this.model.set({'z-index' : new_selfie_zindex});
+			this.model.set({
+				'rot' 	: Math.random()*30-15+'deg',
+				'left' 	: Math.random()*50+'px',
+				'top'	: Math.random()*300+'px',
+				'z-index' : new_selfie_zindex
+			});
 		}
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
@@ -156,6 +158,7 @@ var SelfieView = Backbone.View.extend({
 		  			$(this).css('-webkit-transform' , 'rotate(0)');
 		  			$(this).css('-moz-transform' , 'rotate(0)');
 				});
+
 				// console.log(this);
 				// console.log(this.model.get("json_analysis").url);
 				// console.log(this.model.get("json_analysis").url);
