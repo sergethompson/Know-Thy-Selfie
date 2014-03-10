@@ -30,8 +30,8 @@
 		<br>
 		<br>
 		<div class="centered row" id="selfies-list"></div>
-
-		<div id="amzn-ad">
+	<!-- Amazon random ad serve on page load -->
+	<!-- 	<div id="amzn-ad">
 			<script charset="utf-8" type="text/javascript">
 			var ad_arr = ["B003B2GTY0","B008GVXL1A","B007HR9W44"]//amzn_assoc_placement, amzn_assoc_asins
 			var rand_ad = Math.floor(Math.random()*ad_arr.length);
@@ -47,7 +47,7 @@
 			<script src="http://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&l=as1&source=ac&ref=tf_til">
 			</script>
 
-		</div>
+		</div> -->
 		<script id="selfieview-template" type='text/template'>
 			<div class="col-md-3">
 				<div class="selfie">
@@ -72,7 +72,15 @@
 			</div>
 		</script>
 
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+		  ga('create', 'UA-48842237-1', 'knowthyselfie.com');
+		  ga('send', 'pageview');
+		</script>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.min.js"></script>

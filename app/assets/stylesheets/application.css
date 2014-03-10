@@ -178,8 +178,8 @@ transform-origin: 50% 50%;
 #heading{
 	font-family: 'Cinzel Decorative', cursive;
 	font-weight: 900;
-	margin: -51px -19px;
-	font-size: 8em;
+	margin: -45px auto;
+	font-size: 4em;
 	white-space: nowrap;
 	background-color: black;
   color: transparent;
@@ -188,10 +188,11 @@ transform-origin: 50% 50%;
      -moz-background-clip: text;
           background-clip: text;
 }
- #amzn-ad{
+/* #amzn-ad{
   width: 120px;
   height: 240px;
   overflow: hidden;
-  margin: 390px 0 0 0 ;
+  margin: 400px 0 0 0 ;
+  padding-bottom: 5px;
   float: right;
- }
+ }*/
