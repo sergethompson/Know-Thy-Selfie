@@ -117,22 +117,21 @@ var SelfieView = Backbone.View.extend({
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
-		var index_highest = 0;
-		var new_selfie_zindex = $('.selfie-image').each(function() {
-			    var index_current = parseInt($(this).css("z-index"), 10);
-			    if (index_current > index_highest) {
-			        index_highest = index_current;
-					    }
-					return(index_highest + 1);
-		});
+
 		/* Since these all get set at once, just checking the 'rot' for a -1 value should be sufficient */
 		if (-1 == this.model.get("rot")){
+<<<<<<< HEAD
 			this.model.set({
 				'rot' 	: Math.random()*30-15+'deg',
 				'left' 	: Math.random()*50+'px',
 				'top'	: Math.random()*300+'px',
 				'z-index' : new_selfie_zindex
 			});
+=======
+			this.model.set({'rot' 	: Math.random()*30-15+'deg'});
+  			this.model.set({'left' 	: Math.random()*50+'px'});
+			this.model.set({'top'	: Math.random()*300+'px'});
+>>>>>>> parent of ef7f2a2... added functionality to add each new photo to the top of all others added before it
 		}
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
@@ -181,7 +180,7 @@ var SelfieView = Backbone.View.extend({
 		e.preventDefault();
 		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
 		var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([
-			{"value":this.model.get("sex"),"name":"sex"},
+			{"value":this.model.get("sex"),"name":"sex"}, 
 			{"value":this.model.get("confused"),"name":"confused"},
 			{"value":this.model.get("angry"),"name":"angry"},
 			{"value":this.model.get("glasses"),"name":"glasses"},
@@ -218,10 +217,10 @@ var SelfieView = Backbone.View.extend({
 		showSlide: function(e) {
 		e.preventDefault();
 		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
-		var slideData =
+		var slideData = 
 		[
 			{"value":getNormalizedConfidenceOfSex(this.model),
-			"name":getSexString(this.model)},
+			"name":getSexString(this.model)}, 
 			{"value":this.model.get("confused"),"name":"confused"},
 			{"value":this.model.get("angry"),"name":"angry"},
 			{"value":this.model.get("glasses"),"name":"glasses"},
@@ -242,7 +241,7 @@ var SelfieView = Backbone.View.extend({
 		var projectionSlide = d3.select('#colright-d3').selectAll('div').data([
 
 			{"value":getNormalizedConfidenceOfSex(this.model),
-			"name":getSexString(this.model)},
+			"name":getSexString(this.model)}, 
 			{"value":this.model.get("confused"),"name":"confused"},
 			{"value":this.model.get("angry"),"name":"angry"},
 			{"value":this.model.get("glasses"),"name":"glasses"},
@@ -309,7 +308,7 @@ var SelfieView = Backbone.View.extend({
 		.duration(3000);
 	},
 
-
+	
 	destroy: function(e){
 		e.preventDefault();
 		this.model.destroy();
