@@ -8,78 +8,76 @@
 	<title>Know Thy Selfie</title>
 	</head>
 	<body>
-		<style type="text/css">
-			@font-face {
-			  font-family: "hatchetm";
-			  src: url('<%= asset_path("hatchetm.eot") %>');
-			  src: url('<%= asset_path("hatchetm.eot") + "?#iefix" %>') format('eot'), url('<%= asset_path("hatchetm.woff") %>') format('woff'), url('<%= asset_path("hatchetm.ttf") %>') format('truetype'), url('<%= asset_path("hatchetm.svg") + "#hatchetm" %>') format('svg');
-			  font-weight: normal;
-			  font-style: normal;
-			}
-		</style>
 		<h1 id="heading">Know Thy Selfie</h1>
 	<!-- slideout polaroid -->
-	<div id="slideout">
-	  <div id="slideout_inner">
-	  	<h4 id='tab'>Camera</h4>
-			<div id="wrapper">
-				<div id="gallery"></div>
-			</div>
-			<div id="pic-fade"></div>
-			<img id="camera" src='/assets/base_camera.png'>
-			<div style="z-index:4;" id="example"></div>
-			<form id="selfie-form">
-			<div class="centered">
-				<button id="selfie-submit" class="btn btn-large btn-warning center" type="submit">Submit Your Selfie</button>
-			</div>
-		</form>
-	  </div>
-	</div>
+		<div id="slideout">
+		  <div id="slideout_inner">
+		  	<h4 id='tab'>Camera</h4>
+				<div id="wrapper">
+					<div id="gallery"></div>
+				</div>
+				<div id="pic-fade"></div>
+				<img id="camera" src='/assets/base_camera.png'>
+				<div style="z-index:4;" id="example"></div>
+				<form id="selfie-form">
+				<div class="centered">
+					<button id="selfie-submit" class="btn btn-large btn-warning center" type="submit">Submit Your Selfie</button>
+				</form>
+				</div>
+		  </div>
+		</div>
 
-	<br>
-	<br>
-	<div class="centered row" id="selfies-list"></div>
+		<br>
+		<br>
+		<div class="centered row" id="selfies-list"></div>
 
-	<script id="selfieview-template" type='text/template'>
-		<div class="col-md-3">
-			<div class="selfie">
-				<img id="show" class="selfie-image" src="<%%= show_url %>">
-				<div class="caption">
-					<h2 class="caption_text"><%%= caption %></h2>
-					<div id="stats-view"></div>
-					<button id="stats-slide">Slide Stats</button>
-					<button data-action="destroy">Delete</button>
+		<div id="amzn-ad">
+			<script charset="utf-8" type="text/javascript">
+			var ad_arr = ["B003B2GTY0","B008GVXL1A","B007HR9W44"]//amzn_assoc_placement, amzn_assoc_asins
+			var rand_ad = Math.floor(Math.random()*ad_arr.length);
+			  amzn_assoc_ad_type = "product_link";
+			  amzn_assoc_tracking_id = "knothysel-20";
+			  amzn_assoc_marketplace = "amazon";
+			  amzn_assoc_region = "US";
+			  amzn_assoc_placement = ad_arr[rand_ad];
+			  amzn_assoc_asins = ad_arr[rand_ad];
+			  amzn_assoc_show_border = true;
+			  amzn_assoc_link_opens_in_new_window = true;
+			</script>
+			<script src="http://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&l=as1&source=ac&ref=tf_til">
+			</script>
+
+		</div>
+		<script id="selfieview-template" type='text/template'>
+			<div class="col-md-3">
+				<div class="selfie">
+					<img id="show" class="selfie-image" src="<%%= show_url %>">
+					<div class="caption">
+						<h2 class="caption_text"><%%= caption %></h2>
+						<div id="stats-view"></div>
+						<button id="stats-slide">Slide Stats</button>
+						<button data-action="destroy">Delete</button>
+					</div>
 				</div>
 			</div>
-		</div>
-	</script>
+		</script>
 
 
 
-	<script id="selfieview-stats-template" type='text/template'>
-		<div class="stats">
-			<h3>
-				<%%= glasses %>
-			</h3>
-		</div>
-	</script>
+		<script id="selfieview-stats-template" type='text/template'>
+			<div class="stats">
+				<h3>
+					<%%= glasses %>
+				</h3>
+			</div>
+		</script>
 
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.2/d3.min.js"></script>
 
-	<%= csrf_meta_tag %>
+		<%= csrf_meta_tag %>
 
 </body>
 </html>
-
-<!-- <div id="slideout">
-	  	<h4 id='tab'>Camera</h4>
-	  	<div id="slideout_inner">
-		<div id="wrapper">
-			<div id="example"></div>
-			<div id="gallery"></div>
-		</div>
-		</div>
-	</div> -->
