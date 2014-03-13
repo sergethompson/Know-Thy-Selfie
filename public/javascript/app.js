@@ -1,4 +1,4 @@
-var organized = 0;
+var organized = 1;
 
 // Sets zindex outside functions to be used later unrestricted
 var zindex = 1;
@@ -79,7 +79,31 @@ var SelfieCollection = Backbone.Collection.extend({
 	initialize: function(){
 		this.fetch()
 	},
-	model: Selfie
+	model: Selfie,
+
+  sort_key: 'yaw',
+
+  comparator: function(a, b){
+    a = a.get(this.sort_key);
+    b = b.get(this.sort_key);
+    if (this.sort_key === 'score') {
+      return a > b ? 1
+            : a < b ? -1
+            : 0;
+    } else { 
+    return a < b ? 1
+          : a > b ? -1
+          : 0;
+    }
+  },
+
+  sortByField: function(fieldName){
+    this.sort_key = fieldName;
+    this.sort();
+  },
+
+
+
 });
 
 // ** Submit Button for adding selfie to collection **
@@ -117,20 +141,20 @@ var SelfieView = Backbone.View.extend({
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
-		var index_highest = 0;
-		var new_selfie_zindex = $('.selfie-image').each(function() {
-			    var index_current = parseInt($(this).css("z-index"), 10);
-			    if (index_current > index_highest) {
-			        index_highest = index_current;
-					    }
-					return(index_highest + 1);
-		});
+		// var index_highest = 0;
+		// var new_selfie_zindex = $('.selfie-image').each(function() {
+		// 	    var index_current = parseInt($(this).css("z-index"), 10);
+		// 	    if (index_current > index_highest) {
+		// 	        index_highest = index_current;
+		// 			    }
+		// 			return(index_highest + 1);
+		// });
 		/* Since these all get set at once, just checking the 'rot' for a -1 value should be sufficient */
 		if (-1 == this.model.get("rot")){
 			this.model.set({'rot' 	: Math.random()*30-15+'deg'});
   			this.model.set({'left' 	: Math.random()*50+'px'});
 			this.model.set({'top'	: Math.random()*300+'px'});
-			this.model.set({'z-index' : new_selfie_zindex});
+			//this.model.set({'z-index' : new_selfie_zindex});
 		}
 
 		this.$el.html(this.template_selfie( this.model.attributes ) );
@@ -329,8 +353,9 @@ var SelfieListView = Backbone.View.extend({
 // ** Document Ready **
 $(function(){
 	var selfies_collection = new SelfieCollection();
+	selfies_collection.sortByField();
 	var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
-	var selfie_form_view = new SelfieFormView({collection: selfies_collection, el: $('#selfie-form')})
+	var selfie_form_view = new SelfieFormView({collection: selfies_collection, el: $('#selfie-form')});
 });
 
 
