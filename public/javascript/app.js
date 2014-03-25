@@ -130,8 +130,10 @@ var SelfieView = Backbone.View.extend({
 			this.model.set({
 				'rot' 	: Math.random()*30-15+'deg',
 				'left' 	: Math.random()*50+'px',
-				'top'	: Math.random()*300+'px',
-				'z-index' : new_selfie_zindex
+				'top'	: Math.random()*300+'px'
+				// This was causing items to not be saved in the database
+				// ,
+				// 'z-index' : new_selfie_zindex
 			});
 		}
 
