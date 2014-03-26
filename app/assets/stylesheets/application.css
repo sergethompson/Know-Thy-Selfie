@@ -137,12 +137,6 @@ transform-origin: 50% 50%;
   transition-duration: 0.3s;
 }
 
-#slideout:hover {
-  left:465px;
-}
-#slideout:hover #slideout_inner {
-  left: 0;
-}
 h4#tab{
 box-shadow: -4px 7px 10px #3b2e1b;
 border-bottom-left-radius: 2em;

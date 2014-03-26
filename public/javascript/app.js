@@ -188,12 +188,7 @@ var SelfieView = Backbone.View.extend({
 
 		showSlide: function(e) {
 		e.preventDefault();
-<<<<<<< HEAD
-		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
 		var slideData =
-=======
-		var slideData =
->>>>>>> 5ff558ded96d018e3fbed2f4832d33aceb0ba8c5
 		[
 			{"value":getNormalizedConfidenceOfSex(this.model),
 			"name":getSexString(this.model)},

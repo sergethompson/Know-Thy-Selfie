@@ -29,6 +29,20 @@ $(function(){
 		};
 
 	});
+//shows and hides the camera slideout with the camera tab
+$('#tab').click(function(){
+	if($('#slideout_inner').position().left == -613 ){
+		$('#slideout_inner').css('left', '-60px');
+	} else if($('#slideout_inner').position().left == -60) {
+		$('#slideout_inner').css('left', '-613px');
+	}
+});
+
+//hides the camera tab upon selfie submission
+$('#selfie-submit').click(function(){
+	$('#slideout_inner').css('left', '-613px');
+});
+
 
 
 	/**
