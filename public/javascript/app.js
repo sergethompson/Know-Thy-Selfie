@@ -117,23 +117,12 @@ var SelfieView = Backbone.View.extend({
 	template_selfie_stats: _.template( $("#selfieview-stats-template").html()),
 
 	render: function(){
-		var index_highest = 0;
-		var new_selfie_zindex = $('.selfie-image').each(function() {
-			    var index_current = parseInt($(this).css("z-index"), 10);
-			    if (index_current > index_highest) {
-			        index_highest = index_current;
-					    }
-					return(index_highest + 1);
-		});
 		/* Since these all get set at once, just checking the 'rot' for a -1 value should be sufficient */
 		if (-1 == this.model.get("rot")){
 			this.model.set({
 				'rot' 	: Math.random()*30-15+'deg',
 				'left' 	: Math.random()*50+'px',
 				'top'	: Math.random()*300+'px'
-				// This was causing items to not be saved in the database
-				// ,
-				// 'z-index' : new_selfie_zindex
 			});
 		}
 
@@ -145,6 +134,7 @@ var SelfieView = Backbone.View.extend({
 				.css('-moz-transform' , 'rotate('+this.model.get('rot')+')')
 				.css('top' , this.model.get('top'))
 				.css('left' , this.model.get('left'))
+				.css('z-index', zindex++)
 				.draggable({
 					start: function(event, ui) {
 						zindex++;
@@ -160,28 +150,12 @@ var SelfieView = Backbone.View.extend({
 		  			$(this).css('-webkit-transform' , 'rotate(0)');
 		  			$(this).css('-moz-transform' , 'rotate(0)');
 				});
-
-				// console.log(this);
-				// console.log(this.model.get("json_analysis").url);
-				// console.log(this.model.get("json_analysis").url);
-
-				// console.log("Inspecting this.$el.css to determine if it has a z-index set");
-//				console.log("z-index is: ["+ this.$el.css('z-index') + "]")
-//				if(null == this.$el.css('z-index')){
-				// 	console.log(">>>>>>>>>>>>>>>>Setting z-index");
-				// 	// console.log("Inspecting this.$el.css to determine if it has a z-index set: IT DOES NOT...  Setting one");
-//				 	this.$el.css('z-index' , zindex);
-//				 }
-				// else{
-				// 	console.log("Inspecting this.$el.css to determine if it has a z-index set: IT DOES");
-				// }
 		}
 		return this
 	},
 
 	show: function(e) {
 		e.preventDefault();
-		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
 		var projection = d3.select(this.$('#stats-view')[0]).selectAll('div').data([
 			{"value":this.model.get("sex"),"name":"sex"},
 			{"value":this.model.get("confused"),"name":"confused"},
@@ -208,18 +182,12 @@ var SelfieView = Backbone.View.extend({
 		.style("margin", ".25em")
 		.transition()
 		.duration(3000)
-		// .text(function(d){
-		// 	return d.name
-		// })
 		.style('width' , function(d){return d.value*5 + 2 + 'px';} )
-		.transition()
-		.duration(3000);
 	},
 
 
 		showSlide: function(e) {
 		e.preventDefault();
-		// this.$("#stats-view").html(this.template_selfie_stats( this.model.attributes ) );
 		var slideData =
 		[
 			{"value":getNormalizedConfidenceOfSex(this.model),
@@ -307,8 +275,6 @@ var SelfieView = Backbone.View.extend({
 			return d.name
 		})
 		.style('width' , function(d){return d.value*150 + 2 + 'px';} )
-		.transition()
-		.duration(3000);
 	},
 
 
@@ -337,10 +303,3 @@ $(function(){
 	var selfie_list_view = new SelfieListView({collection: selfies_collection, el: $('#selfies-list')});
 	var selfie_form_view = new SelfieFormView({collection: selfies_collection, el: $('#selfie-form')})
 });
-
-
-
-
-
-
-
