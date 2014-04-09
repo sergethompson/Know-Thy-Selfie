@@ -19,5 +19,3 @@ The server-side is implemented in Rails with Postgres, Amazon Web Services (S3),
 
 [Know Thy Selfie]:http://www.KnowThySelfie.com
 
-
-    
